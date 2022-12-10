@@ -105,3 +105,24 @@ navItemBox.onmouseout = function waveTextHoverOff() {
         navItemText.style.animationName = "none"
     }    
 }
+
+
+document.querySelector(".leftRightParaBox").onmouseover = function leftRightHoverOver() { /* When uou hover over */
+var leftPara = document.getElementById("navListLeftPara");
+var rightPara = document.getElementById("navListRightPara");
+    rightPara.style.transform = "rotateX(0deg) rotateY(45deg)";
+    leftPara.style.transform = "rotateX(0deg) rotateY(-20deg)";
+    leftPara.style.color = "#ffce6b"; /* Yellow highlight color */
+    rightPara.style.color = "white";
+
+}
+
+document.querySelector(".leftRightParaBox").onmouseout = function leftRightHoverOut() { /* When uou hover out */
+var leftPara = document.getElementById("navListLeftPara");
+var rightPara = document.getElementById("navListRightPara");
+    rightPara.style.transform = "rotateX(0deg) rotateY(93deg)";
+    leftPara.style.transform = "rotateX(0deg) rotateY(0deg)";
+    leftPara.style.color = "white";
+    rightPara.style.color = "#6b21ff"; /* Ourple colors */
+}
+

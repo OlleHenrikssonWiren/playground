@@ -53,7 +53,7 @@ nav {
     font-size: 1.3em;
     align-items: center;
     justify-content: space-evenly;
-    font-variant: small-caps;
+    text-transform: uppercase;
     letter-spacing: 0.2em;
 }
 nav a {
@@ -68,4 +68,21 @@ nav a {
 #navItem1st span  {
     padding: 0 0px;
     display:table-cell;
+}
+
+.leftRightParaBox {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap:0;
+    perspective: 500px;
+}
+#navListRightPara {
+    transition: all ease-out 0.4s;
+    transform-origin: left;
+    transform: rotateX(0deg) rotateY(93deg);
+}
+#navListLeftPara {
+    transition: all ease-in-out 0.6s;
+    transform-origin: right;
+    transform: rotateX(0deg) rotateY(0deg);
 }
