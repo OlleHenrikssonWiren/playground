@@ -94,5 +94,46 @@ nav a {
 }
 .navItemDropShadow:hover {
     box-shadow: inset 200px 0 0 0 #ffce6b;
-    color: black;
+    color: rgb(0, 0, 0);
+}
+
+#firefoxIcon {
+    width: 2em;
+    transition: all ease-in-out 0.5s;    
+    fill: white;
+    pointer-events: none;
+    cursor: default;
+}
+.iconHoverBox div {
+    background-color: rgb(53, 53, 53);
+    border-radius: 50%;
+    height: 3em;
+    width: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.5s;    
+
+}
+.iconHoverBox {
+    display: flex;
+    grid-auto-flow: row;
+    grid-column-gap: 1em;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgb(22, 22, 22);
+    padding: 0.66em;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    transition: all ease-in-out 0.5s;    
+
+}
+#chromeIcon {
+    width: 2em;
+    fill: white;
+    transition: all ease-in-out 0.5s;    
+    pointer-events: none;
+    cursor: default;
+
 }

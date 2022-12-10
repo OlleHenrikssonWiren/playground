@@ -126,3 +126,36 @@ var rightPara = document.getElementById("navListRightPara");
     rightPara.style.color = "#6b21ff"; /* Ourple colors */
 }
 
+var backgroundDiv = document.querySelector(".iconHoverBox");
+
+firefoxLogoDiv.onmouseover = function firefoxHoverAni() { /* Firefox Hover ON */
+    var firefoxLogoDiv = document.getElementById("firefoxLogoDiv")
+    var firefoxLogo = document.getElementById("firefoxIcon")
+    firefoxLogoDiv.style.boxShadow = "0 0 15px #ffee10"
+} 
+firefoxLogoDiv.onmouseout = function firefoxHoverAniOff() { /* Firefox hover OFF */
+    var firefoxLogoDiv = document.getElementById("firefoxLogoDiv")
+    var firefoxLogo = document.getElementById("firefoxIcon")
+    firefoxLogoDiv.style.boxShadow = "none"
+} 
+
+chromeLogoDiv.onmouseover = function chromeHoverAni() { /* cHROME hover ON */
+    var chromeLogoDiv = document.getElementById("chromeLogoDiv")
+    var chromeLogo = document.getElementById("chromeIcon")
+    chromeLogoDiv.style.boxShadow = "0 0 15px #ffee10"
+} 
+
+chromeLogoDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover Off */
+    var chromeLogoDiv = document.getElementById("chromeLogoDiv")
+    var chromeLogo = document.getElementById("chromeIcon")
+    chromeLogoDiv.style.boxShadow = "none"
+} 
+
+backgroundDiv.onmouseover = function chromeHoverAni() { /* cHROME hover ON */
+    backgroundDiv.style.boxShadow = "0 0 15px #ffee10"
+} 
+backgroundDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover OFF */
+    backgroundDiv.style.boxShadow = "none"
+} 
+
+
