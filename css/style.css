@@ -137,3 +137,10 @@ nav a {
     cursor: default;
 
 }
+
+
+.model {
+    height: 20vh;
+    width: 20vw;
+    display: block;
+}
