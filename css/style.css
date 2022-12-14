@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 body {
     background-color: rgb(7, 7, 7);
@@ -10,7 +11,19 @@ body {
     width:100%;
     display:block;
     position:relative;
+    color: white;
 }
+
+#wrapper {
+    display: grid;
+    grid-template-areas: 
+    'nv'
+    'mn';
+    grid-template-rows: auto auto;
+    max-width: 100vw;
+    overflow-y: hidden;
+}
+
 
 @keyframes navJump {
     0% {
@@ -55,6 +68,9 @@ nav {
     justify-content: space-evenly;
     text-transform: uppercase;
     letter-spacing: 0.2em;
+    position: fixed;
+    overflow-y: hidden;
+
 }
 nav a {
     cursor: pointer;
@@ -139,8 +155,18 @@ nav a {
 }
 
 
-.model {
-    height: 20vh;
-    width: 20vw;
-    display: block;
+main {
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scrollbar-width: 0;
+}
+.mainBox {
+    scroll-snap-align: start;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    overflow: hidden;
 }
