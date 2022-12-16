@@ -158,4 +158,13 @@ backgroundDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover OFF */
     backgroundDiv.style.boxShadow = "none"
 } 
 
+var a = main.scrollTop;
+var b = main.scrollHeight - document.clientHeight;
+var c = a / b;
 
+main.onscroll = function scrollDetect() {
+	console.log(c + " = a / b")
+	console.log(b + " = scrollH - clientH")
+	console.log(a + " = scrollT")
+
+}
