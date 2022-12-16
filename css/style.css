@@ -171,14 +171,7 @@ main {
     overflow: hidden;
 }
 
-.scrollTracker {
-    display: flex;
-    width: 100vw;
-    height: 5vh;
-    justify-content: center;
-    align-items: flex-end;
-    border: solid orange 1px;
-}
+
 .navBox {
     display: flex;
     flex-direction: row;
@@ -187,12 +180,20 @@ main {
     align-items: center;
     padding-bottom: 1em;
 }
-.trackerBar {
-    width: 80vw;
+.scrollTracker {
+    display: flex;
+    width: 100vw;
     height: 2vh;
-    border: blue solid 1px;
-    background-color: gray;
-    box-shadow: inset 0vw 0 0 0 #ffce6b;
-    border-radius: 1em;
+    align-self: center;
+    justify-self: flex-end;
+    justify-content: flex-start;
+    align-items: center;
+    border: solid gray 1px;
+}
+.trackerBar {
+    width: 50vw;
+    height: 2vh;
+    background-color: #ffce6b;
+    transition: ease-out width 0.1s;
 
 }

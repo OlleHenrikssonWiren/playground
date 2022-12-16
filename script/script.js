@@ -158,13 +158,15 @@ backgroundDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover OFF */
     backgroundDiv.style.boxShadow = "none"
 } 
 
-var a = main.scrollTop;
-var b = main.scrollHeight - document.clientHeight;
-var c = a / b;
+var main = document.getElementById("main")
+// When the user scrolls the page, execute myFunction
+main.onscroll = function() {scrollTracker()};
 
-main.onscroll = function scrollDetect() {
-	console.log(c + " = a / b")
-	console.log(b + " = scrollH - clientH")
-	console.log(a + " = scrollT")
 
+function scrollTracker() {
+  var winScroll = main.scrollTop || document.documentElement.scrollTop;
+  var height = main.scrollHeight - main.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  console.log("main")
+  document.querySelector(".trackerBar").style.width = scrolled + "%";
 }
