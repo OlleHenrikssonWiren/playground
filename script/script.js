@@ -1,3 +1,4 @@
+
 // Amount of Snowflakes
 var snowMax = 40;
 
@@ -35,7 +36,7 @@ function randomise(range) {
     return rand;
 }
 
-function initSnow() {
+ function initSnow() {
 	var snowSize = snowMaxSize - snowMinSize;
 	marginBottom = document.body.scrollHeight - 480;
 	marginRight = document.body.clientWidth - 15;
@@ -58,6 +59,7 @@ function initSnow() {
 	}
 
 	moveSnow();
+	 
 }
 function moveSnow() {
 	for (i = 0; i <= snowMax; i++) {
@@ -93,68 +95,67 @@ window.addEventListener('resize', resize);
 
     var navItemBox = document.getElementById("navItem1st")
     
-navItemBox.onmouseover = function waveTextHoverOn() { /* When you hover over */
+navItemBox.onmouseover = function waveTextHoverOn() { //When you hover over
     var navItemText = document.getElementsByClassName("navItemLetter")
-    for (var navItemText of navItemText) { /* Simple loop to iterate through classes */
+    for (var navItemText of navItemText) { // Simple loop to iterate through classes
         navItemText.style.animationName = "navJump"
     }    
 }    
 navItemBox.onmouseout = function waveTextHoverOff() {
     var navItemText = document.getElementsByClassName("navItemLetter")
-    for (var navItemText of navItemText) { /* Simple loop to iterate through classes */
+    for (var navItemText of navItemText) { // Simple loop to iterate through classes
         navItemText.style.animationName = "none"
     }    
 }
 
 
-document.querySelector(".leftRightParaBox").onmouseover = function leftRightHoverOver() { /* When uou hover over */
+document.querySelector(".leftRightParaBox").onmouseover = function leftRightHoverOver() { // When uou hover over
 var leftPara = document.getElementById("navListLeftPara");
 var rightPara = document.getElementById("navListRightPara");
     rightPara.style.transform = "rotateX(0deg) rotateY(45deg)";
     leftPara.style.transform = "rotateX(0deg) rotateY(-20deg)";
-    leftPara.style.color = "#ffce6b"; /* Yellow highlight color */
+    leftPara.style.color = "#ffce6b"; // Yellow highlight color 
     rightPara.style.color = "white";
 
 }
 
-document.querySelector(".leftRightParaBox").onmouseout = function leftRightHoverOut() { /* When uou hover out */
+document.querySelector(".leftRightParaBox").onmouseout = function leftRightHoverOut() { // When uou hover out
 var leftPara = document.getElementById("navListLeftPara");
 var rightPara = document.getElementById("navListRightPara");
     rightPara.style.transform = "rotateX(0deg) rotateY(93deg)";
     leftPara.style.transform = "rotateX(0deg) rotateY(0deg)";
     leftPara.style.color = "white";
-    rightPara.style.color = "#6b21ff"; /* Ourple colors */
+    rightPara.style.color = "#6b21ff"; // Ourple colors
 }
 
 var backgroundDiv = document.querySelector(".iconHoverBox");
 
-firefoxLogoDiv.onmouseover = function firefoxHoverAni() { /* Firefox Hover ON */
-    var firefoxLogoDiv = document.getElementById("firefoxLogoDiv")
+firefoxLogoDiv.onmouseover = function firefoxHoverAni() { // Firefox Hover ON 
     var firefoxLogo = document.getElementById("firefoxIcon")
     firefoxLogoDiv.style.boxShadow = "0 0 15px #ffee10"
 } 
-firefoxLogoDiv.onmouseout = function firefoxHoverAniOff() { /* Firefox hover OFF */
+firefoxLogoDiv.onmouseout = function firefoxHoverAniOff() { // Firefox hover OFF 
     var firefoxLogoDiv = document.getElementById("firefoxLogoDiv")
     var firefoxLogo = document.getElementById("firefoxIcon")
     firefoxLogoDiv.style.boxShadow = "none"
 } 
 
-chromeLogoDiv.onmouseover = function chromeHoverAni() { /* cHROME hover ON */
+chromeLogoDiv.onmouseover = function chromeHoverAni() { // cHROME hover ON 
     var chromeLogoDiv = document.getElementById("chromeLogoDiv")
     var chromeLogo = document.getElementById("chromeIcon")
     chromeLogoDiv.style.boxShadow = "0 0 15px #ffee10"
 } 
 
-chromeLogoDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover Off */
+chromeLogoDiv.onmouseout = function chromeHoverAniOff() { // cHROME hover Off
     var chromeLogoDiv = document.getElementById("chromeLogoDiv")
     var chromeLogo = document.getElementById("chromeIcon")
     chromeLogoDiv.style.boxShadow = "none"
 } 
 
-backgroundDiv.onmouseover = function chromeHoverAni() { /* cHROME hover ON */
+backgroundDiv.onmouseover = function chromeHoverAni() { // cHROME hover ON
     backgroundDiv.style.boxShadow = "0 0 15px #ffee10"
 } 
-backgroundDiv.onmouseout = function chromeHoverAniOff() { /* cHROME hover OFF */
+backgroundDiv.onmouseout = function chromeHoverAniOff() { // cHROME hover OFF
     backgroundDiv.style.boxShadow = "none"
 } 
 
@@ -169,4 +170,46 @@ function scrollTracker() {
   var scrolled = (winScroll / height) * 100;
   console.log("main")
   document.querySelector(".trackerBar").style.width = scrolled + "%";
+}
+
+var ball = document.querySelector("#ball");
+var ballBox = document.querySelector("#ballBox");
+var ballTracker = document.querySelector("#ballTracker")
+
+ballBox.onmousemove = (event) => {
+	
+var x = (event.clientX - ballBox.offsetLeft) * 100 / ballBox.offsetWidth  + "%";
+
+var y = (event.clientY - ballBox.offsetTop) * 100 / ballBox.offsetHeight + "%";
+
+	console.log(x, y)
+
+	ball.style.top = y;
+	ball.style.left = x;
+	ball.style.width = "100px";
+	ball.style.height = "100px";
+	ball.style.borderRadius = "100%";
+	ball.style.transform = "translate(-50%, -50%)"
+	ball.style.boxShadow = "0 0 30px 1px #222236ad"
+	ball.style.transition = "0.07s ease-out";
+
+	
+}
+ballBox.onmouseover = (event) => {
+	ball.style.transition = "0.7s";
+
+
+}
+ballBox.onmouseout = (event) => {
+	ball.style.transition = "0.7s";
+	ball.style.top = "0";
+	ball.style.left = "0";
+	ball.style.width = "100%"
+	ball.style.height = "100%"
+	ball.style.borderRadius = "10%";
+	ball.style.transform = "translate(0%, 0%)"
+	ball.style.border = "0"
+	ball.style.boxShadow = "0"
+
+
 }

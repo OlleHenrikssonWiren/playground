@@ -197,3 +197,34 @@ main {
     transition: ease-out width 0.1s;
 
 }
+
+#ballBox {
+    width: 500px;
+    height: 500px;
+    border-radius: 100px;
+    background-color: white;
+    position: relative;  
+    border: solid 1px white;
+    z-index: 11000; 
+    overflow: hidden;
+    box-shadow: 0 0 30px 1px #ffffff;
+}
+.ballTextBox {
+    margin: 4em;
+    position: absolute;
+    user-select: none;
+    z-index: 11750;
+}
+.ballTextBox p:nth-child(1) {
+    margin-bottom: 3em;
+}
+#ball {
+    filter: drop-shadow();
+    width: 500px;
+    height: 500px;
+    background-color: black;
+    border-radius: 100px;
+    position: relative;
+    z-index: 11500;
+    transition: all ease 0.7s;
+}
