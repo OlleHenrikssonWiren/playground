@@ -208,6 +208,8 @@ main {
     z-index: 11000; 
     overflow: hidden;
     box-shadow: 0 0 30px 1px #ffffff;
+    margin-right: 3em;
+
 }
 .ballTextBox {
     margin: 4em;
@@ -219,10 +221,32 @@ main {
     margin-bottom: 3em;
 }
 #ball {
-    filter: drop-shadow();
     width: 500px;
     height: 500px;
-    background-color: black;
+    background-color: white;
+    border-radius: 100px;
+    position: relative;
+    z-index: 11500;
+    transition: all ease 0.7s;
+    opacity: 0;
+}
+
+.dragBox {
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    border-radius: 100px;
+    position: relative;
+    z-index: 11000;
+    margin-left: 3em;
+    overflow: hidden;
+    border: solid 1px white;
+    box-shadow: 0 0 30px 1px #ffffff;
+}
+.dragBall {
+    width: 500px;
+    height: 500px;
+    background-color:black;
     border-radius: 100px;
     position: relative;
     z-index: 11500;

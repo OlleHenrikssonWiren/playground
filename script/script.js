@@ -185,31 +185,81 @@ var y = (event.clientY - ballBox.offsetTop) * 100 / ballBox.offsetHeight + "%";
 	console.log(x, y)
 
 	ball.style.top = y;
-	ball.style.left = x;
+	ball.style.left = x
+	
 	ball.style.width = "100px";
 	ball.style.height = "100px";
 	ball.style.borderRadius = "100%";
 	ball.style.transform = "translate(-50%, -50%)"
 	ball.style.boxShadow = "0 0 30px 1px #222236ad"
 	ball.style.transition = "0.07s ease-out";
+	ball.style.transition = " opacity 1s ease-out";
+	ball.style.transition = "background-color 0s";
+	
 
 	
 }
 ballBox.onmouseover = (event) => {
-	ball.style.transition = "0.7s";
 
+	ball.style.transition = " opacity 2s ease-out";
+	ball.style.opacity = "1";
+	ball.style.backgroundColor = "black"
+	ball.style.width = "100px"
+	ball.style.height = "100px"
 
 }
 ballBox.onmouseout = (event) => {
+	var x = (event.clientX - ballBox.offsetLeft) * 100 / ballBox.offsetWidth  + "%";
+	var y = (event.clientY - ballBox.offsetTop) * 100 / ballBox.offsetHeight + "%";
+
 	ball.style.transition = "0.7s";
-	ball.style.top = "0";
-	ball.style.left = "0";
-	ball.style.width = "100%"
-	ball.style.height = "100%"
-	ball.style.borderRadius = "10%";
-	ball.style.transform = "translate(0%, 0%)"
+	ball.style.top = y;
+	ball.style.left = x;
 	ball.style.border = "0"
 	ball.style.boxShadow = "0"
+	ball.style.opacity = "0"
+	
+	ball.style.transition = "all 0.3s ease-out";
+
+}
 
 
+
+
+
+
+
+var dragBall = document.querySelector(".dragBall");
+var dragBox = document.querySelector(".dragBox");
+
+
+dragBox.ondrag = (event) => {
+	var x = (event.clientX - dragBox.offsetLeft) * 100 / dragBox.offsetWidth  + "%";
+
+	var y = (event.clientY - dragBox.offsetTop) * 100 / dragBox.offsetHeight + "%";
+	console.log(x, y);
+	dragBall.style.top = y;
+	dragBall.style.left = x;
+}
+dragBox.onmouseover = (event) => {
+	dragBall.style.width = "100px"
+	dragBall.style.height = "100px"
+	dragBall.style.borderRadius = "100%";
+	dragBall.style.top = "50%";
+	dragBall.style.left = "50%";
+	dragBall.style.transform = "translate(-50%, -50%)";
+
+	dragBall.style.boxShadow = "0 0 30px 1px #222236ad";
+}
+dragBox.onmouseout = (event) => {
+	dragBall.style.left = "0";
+	dragBall.style.top = "0";
+	dragBall.style.width = "100%";
+	dragBall.style.height = "100%";
+	dragBall.style.borderRadius = "10%";
+	dragBall.style.border = "0";
+	dragBall.style.boxShadow = "0";
+	dragBall.style.top = "0%";
+	dragBall.style.left = "0%";
+	dragBall.style.transform = "translate( 0%, 0%)";
 }
