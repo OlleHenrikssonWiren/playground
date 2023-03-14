@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Noto+Serif&family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+    </style> <!-- font-family: 'Open Sans', sans-serif;  -->
+</head>
+</head>
+<body>
+<div class="mineWrapper">
+    <nav id="nav">
+        <div class="navBox mineNav">
+            <div class="titleNav">Minesweeper</div>
+            <div class="backNav"><a href="index.html">Home</a></div>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <div id="mineBox">
+            
+               <div id="field"></div>
+               <br>
+             <div id="lost" style="display: none;">
+               <h3>You got bombed!</h3>
+               <button id="new-game-button" type="button" onclick="reload()">Start Again</button>
+             </div>         
+         </div>
+
+    </main>
+
+</div>
+
+
+<script src="/script/minesweeper.js"></script>
+</body>
+</html>

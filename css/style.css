@@ -155,7 +155,7 @@ nav a {
 }
 
 
-main {
+#main {
     height: 100vh;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
@@ -252,3 +252,70 @@ main {
     z-index: 11500;
     transition: all ease 0.7s;
 }
+
+.navItem p {
+    border: solid white 2px;
+    border-radius: 0.33rem;
+    padding: 0.5rem;
+}
+
+.navItem p:hover {
+    background-color: rgb(56, 56, 56);
+    cursor: pointer;
+}
+
+
+
+.main {
+    margin-top: 15vh;
+}
+
+.mineWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.mineNav {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+.backNav {
+    position: relative;
+    left: 33%;
+    
+}
+.titleNav {
+    margin: 0;
+    border-bottom: solid white 1px;
+}
+
+
+#mineBox {
+    text-align: center;
+}
+#mineBox h2, h3 {
+    color: whitesmoke;
+}
+
+#field table {
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+#field table td {
+    background-color: greenyellow;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    border: solid white 1px;
+}
+
+button {
+    width: 200px;
+    height: 32px;
+    background-color: whitesmoke;
+    color: black;
+}
+
