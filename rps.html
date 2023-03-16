@@ -10,6 +10,7 @@
 </head>
 <body>
     <nav id="nav">
+        <button class="resetBtn">reset</button>
         <div class="navBox mineNav">
             <div class="titleNav">RPS!  </div>
             <div class="backNav"><a href="index.html">Home</a></div>
@@ -23,17 +24,19 @@
 
         
         -->
-    <main class="rpsWrapper">
+    <div class="rpsWrapper">
         <div class="rpsPlayer1Box">
-            <h1 class="item" id="rock">&#129704;</h1>
-            <h1 class="item" id="paper">&#128196;</h1>
-            <h1 class="item" id="scissor">✂️</h1>
+            <div class="backdrop1"></div>
+            <div class="itemBox"><h1 class="item player1Item selectAni" id="rock">&#129704;</h1><div class="glowBox1"></div></div>
+            <div class="itemBox"><h1 class="item player1Item selectAni" id="paper">&#128196;</h1><div class="glowBox1"></div></div>
+            <div class="itemBox"><h1 class="item player1Item selectAni" id="scissor">✂️</h1><div class="glowBox1"></div></div>
         </div>
 
         <div class="rpsPlayer2Box">
-            <h1 class="item" id="rock">&#129704;</h1>
-            <h1 class="item" id="paper">&#128196;</h1>
-            <h1 class="item" id="scissor">✂️</h1>
+            <div class="backdrop2"></div>
+            <div class="itemBox"><h1 class="item player2Item selectAni" id="rock">&#129704;</h1><div class="glowBox2"></div></div>
+            <div class="itemBox"><h1 class="item player2Item selectAni" id="paper">&#128196;</h1><div class="glowBox2"></div></div>
+            <div class="itemBox"><h1 class="item player2Item selectAni" id="scissor">✂️</h1><div class="glowBox2"></div></div>
         </div>
     </main>
 
