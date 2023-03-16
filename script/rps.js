@@ -5,8 +5,20 @@
 //}
 let enabled1 = true; // Toggle key regs for player 1
 let enabled2 = true; // Toggle Key regs for player 2 
-var selectionAudio1 = new Audio("../audio/rps/player1Select.ogg");
+var selectionAudio1 = new Audio("../audio/rps/player1Select.mp3");
 var selectionAudio2 = new Audio("../audio/rps/player2Select.wav");
+var countAudio = new Audio("../audio/rps/countdown.ogg");
+var countAudio2 = new Audio("../audio/rps/countdown.ogg");
+let p1Choice = "";
+let p2Choice = "";
+let draw = 0;
+let win = 0;
+let loss = 0;
+let points1 = 0; //actual score
+let points2 = 0; //actual score
+
+let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
+let pointsCounter2 = document.querySelector(".score2");
 
 document.querySelector(".resetBtn").onclick = function reset() {
     enabled1 = true;
@@ -26,6 +38,8 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
             SelectDone()
             playSelectAni() 
             selectionAudio1.play(); //play audio on select
+
+            p1Choice = "rock";
         break;
 
         case "w": // Code for W
@@ -34,6 +48,8 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
             SelectDone()
             playSelectAni() 
             selectionAudio1.play();
+
+            p1Choice = "paper";
         break;
             
         case "e": // Code for E
@@ -42,6 +58,8 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
             SelectDone()
             playSelectAni() 
             selectionAudio1.play(); 
+
+            p1Choice = "scissor";
         break;
 
         }
@@ -49,14 +67,17 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
         switch(keyBtn) {
             case "q":        
                 console.log("1 already chose")
+                
             break;
 
             case "w":        
                 console.log("1 already chose")
+                
             break;
 
             case "e":        
                 console.log("1 already chose")
+                
             break;
         }
     }
@@ -109,13 +130,17 @@ document.addEventListener("keyup", (keyPress2) =>  {
             playSelectAni();
             selectionAudio2.play(); 
             
+            p2Choice = "rock";
+            
         break;
 
         case "o":
             console.log(keyBtn2);
             SelectDone();
             playSelectAni();
-            selectionAudio2.play(); 
+            selectionAudio2.play();
+            
+            p2Choice = "paper";
         break;
         
         case "p":
@@ -123,20 +148,25 @@ document.addEventListener("keyup", (keyPress2) =>  {
             SelectDone();
             playSelectAni();
             selectionAudio2.play(); 
+            
+            p2Choice = "scissor";
         break;
         }
     } else  {
         switch(keyBtn2) {
         case "i":        
             console.log("2 already chose")
+            
         break;
 
         case "o":        
             console.log("2 already chose")
+            
         break;
 
         case "p":        
             console.log("2 already chose")
+            
         break;
         }
     }
@@ -191,11 +221,140 @@ function checkCountdown() { // To check if countdown should begin
     if(enabled1 === false && enabled2 === false) {
         console.log("3. 2 . 1")
         startCountdown();
+        enabled1 = true;
+        enabled2 = true;
     } else {
         console.log("oopsie")
     }
 }
 
 function startCountdown() {
+    let three = document.querySelector(".three");
+    let two = document.querySelector(".two");
+    let one = document.querySelector(".one");
+
+    setTimeout(() => {
+        three.classList.add("timerOn")
+        countAudio.play()
+    }, 1000);
+    setTimeout(() => {
+        three.classList.remove("timerOn")
+    }, 1500);
+    setTimeout(() => {
+        two.classList.add("timerOn")
+        countAudio2.play() //Same audio, they just cant stack so i need to variables for same audio sample
+    }, 2000);
+    setTimeout(() => {
+        two.classList.remove("timerOn")
+    }, 2500);
+    setTimeout(() => {
+        one.classList.add("timerOn")
+        countAudio.play()
+    }, 3000);
+    setTimeout(() => {
+        one.classList.remove("timerOn")
+        console.log(p1Choice + p2Choice)
+    }, 3500);
+    setTimeout(() =>{
+        selectWinner();
+    }, 4000) 
+}
+
+function selectWinner() {
+    let player1Item = document.querySelectorAll(".player1Item");
+    let glowBox1 = document.querySelectorAll(".glowBox1");
+
+    let glowBox2 = document.querySelectorAll(".glowBox2");
+    let player2Item = document.querySelectorAll(".player2Item")
+
+    console.log("selecting winner " +p1Choice)
+for (let a = 0; a < glowBox1.length; a++) {
+    switch (p1Choice) {
+        case "rock":
+            console.log("rock glow")
+            glowBox1[0].classList.add("glow");
+        break;
+        
+        case "paper":
+            glowBox1[1].classList.add("glow");
+        break;
+        
+        case "scissor":
+            glowBox1[2].classList.add("glow");
+        break;
+
+        }
+    }
+
+    for (let b = 0; b < glowBox2.length; b++) {
+        switch (p2Choice) {
+            case "rock":
+                glowBox2[0].classList.add("glow");
+            break;
+
+            case "paper":
+                glowBox2[1].classList.add("glow");
+            break;
+
+            case "scissor":
+                glowBox2[2].classList.add("glow");
+        }
+    }
+
+setTimeout(() => {
+if (p1Choice === "rock" && p2Choice === "rock") {
+    draw = true;
+    glowBox1[0].classList.remove("glow");
+    glowBox2[0].classList.remove("glow");
+} 
+if (p1Choice === "rock" && p2Choice === "paper") {
+    points2 += 1;
+    pointsCounter2.innerHTML = points2;
+    glowBox1[0].classList.remove("glow");
+    glowBox2[1].classList.remove("glow");
+}
+if (p1Choice === "rock" && p2Choice === "scissor") {
+    points1 += 1;
+    pointsCounter1.innerHTML = points1;
+    glowBox1[0].classList.remove("glow");
+    glowBox2[2].classList.remove("glow");
+}
+if(p1Choice === "paper" && p2Choice === "rock") {// 1 paper , 2 scissor 
+    points1 += 1;
+    pointsCounter1.innerHTML = points1;
+    glowBox1[1].classList.remove("glow");
+    glowBox2[0].classList.remove("glow");
+}
+if(p1Choice === "paper" && p2Choice === "paper") {
+    draw = true;
+    glowBox1[1].classList.remove("glow");
+    glowBox2[1].classList.remove("glow");
+}
+if (p1Choice === "paper" && p2Choice === "scissor") {
+    points2 += 1;
+    pointsCounter2.innerHTML = points2;
+    glowBox1[1].classList.remove("glow");
+    glowBox2[2].classList.remove("glow");
+}
+if (p1Choice === "scissor" && p2Choice == "rock") {
+    points2 += 1;
+    pointsCounter2.innerHTML = points2;
+    glowBox1[2].classList.remove("glow");
+    glowBox2[0].classList.remove("glow");
+}
+if (p1Choice === "scissor" && p2Choice === "paper") {
+    points1 += 1;
+    pointsCounter1.innerHTML = points1;
+    glowBox1[2].classList.remove("glow");
+    glowBox2[1].classList.remove("glow");
+}
+if (p1Choice === "scissor" && p2Choice === "scissor") {
+    draw = true;
+    glowBox1[2].classList.remove("glow");
+    glowBox2[2].classList.remove("glow");
+}
+
+
+},1500);
     
 }
