@@ -451,6 +451,30 @@ button {
     justify-content: center;
     text-align: center;
 }
+.character1 {
+    transform: rotate(-35deg) scaleX(-1);
+    left: -200px;
+}
+.character2 {
+    transform: rotate(30deg);
+    right: -200px;
+
+}
+.character1, .character2 {
+    position: fixed;
+    font-size: 12rem;
+    bottom: -20vh;
+    transition: ease-in-out 0.4s; 
+}
+.char1On {
+    bottom: 0;
+    left: -6px;
+}
+.char2On {
+    bottom: 0px;
+    right: -20px;
+}
+
 .timerOn {
     font-size: 10rem;
 }

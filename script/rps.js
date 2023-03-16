@@ -23,6 +23,10 @@ let pointsCounter2 = document.querySelector(".score2");
 document.querySelector(".resetBtn").onclick = function reset() {
     enabled1 = true;
     enabled2 = true;
+    points1 = 0;
+    points2 = 0;
+    pointsCounter1.innerHTML = points1;
+    pointsCounter2.innerHTML = points2;
 }
 
 
@@ -93,6 +97,8 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
         let player1items = document.getElementsByClassName("player1Item");
         let player1Backdrop = document.querySelector(".backdrop1");
         let glowBox1 = document.querySelectorAll(".glowBox1");
+        let char1 = document.querySelector(".character1");
+        
 
         for (let a = 0; a < glowBox1.length; a++) { //För att lägga till en glow effect
             glowBox1[a].classList.add("glow");
@@ -111,6 +117,12 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
         player1Backdrop.classList.add("backdropPlay");
         setTimeout(function() {
         player1Backdrop.classList.remove("backdropPlay");
+        }, 400)
+
+        //Enter the chraacters
+        char1.classList.add("char1On");
+        setTimeout(function() {
+        char1.classList.remove("char1On");
         }, 400)
     }
 
@@ -182,7 +194,7 @@ document.addEventListener("keyup", (keyPress2) =>  {
         let player2items = document.getElementsByClassName("player2Item");
         let player2Backdrop = document.querySelector(".backdrop2");
         let glowBox2 = document.querySelectorAll(".glowBox2");
-
+        let char2 = document.querySelector(".character2");
 
         for (let a = 0; a < glowBox2.length; a++) { //För att lägga till en glow effect
             glowBox2[a].classList.add("glow");
@@ -203,6 +215,11 @@ document.addEventListener("keyup", (keyPress2) =>  {
         player2Backdrop.classList.add("backdropPlay2");
         setTimeout(function() {
         player2Backdrop.classList.remove("backdropPlay2");
+        }, 400)
+
+        char2.classList.add("char2On");
+        setTimeout(function() {
+        char2.classList.remove("char2On");
         }, 400)
     }
 });
@@ -232,6 +249,7 @@ function startCountdown() {
     let three = document.querySelector(".three");
     let two = document.querySelector(".two");
     let one = document.querySelector(".one");
+
 
     setTimeout(() => {
         three.classList.add("timerOn")
@@ -353,8 +371,6 @@ if (p1Choice === "scissor" && p2Choice === "scissor") {
     glowBox1[2].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
 }
-
-
 },1500);
     
 }
