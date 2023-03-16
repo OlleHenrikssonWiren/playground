@@ -176,7 +176,26 @@ document.addEventListener("keyup", (keyPress2) =>  {
         }, 400)
     }
 });
-
+document.onclick = function enableChecker() {
 // What to do after press.
+if (enabled1 === false && enabled2 === false) {
+    console.log("count down")
 
+    } else {
+        console.log("sitl wa" + enabled1 + enabled2);
+    }
+}<
+    document.addEventListener("keyup", checkCountdown);
 
+function checkCountdown() { // To check if countdown should begin
+    if(enabled1 === false && enabled2 === false) {
+        console.log("3. 2 . 1")
+        startCountdown();
+    } else {
+        console.log("oopsie")
+    }
+}
+
+function startCountdown() {
+    
+}

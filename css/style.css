@@ -429,6 +429,24 @@ button {
     
 }
 
+.timerBox {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    display: inline;
+    text-align: center;
+}
+.timer {
+    display: inline;
+    position: absolute;
+
+
+}
+.timerOn {
+    font-size: 7rem;
+}
+
+
 @keyframes tilt-shaking {
     0% { transform: rotate(0deg);
         font-size: 5.0rem; 
