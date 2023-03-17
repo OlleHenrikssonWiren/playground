@@ -11,11 +11,12 @@ var countAudio = new Audio("../audio/rps/countdown.ogg");
 var countAudio2 = new Audio("../audio/rps/countdown.ogg");
 let p1Choice = "";
 let p2Choice = "";
-let draw = 0;
-let win = 0;
-let loss = 0;
+let draw = 0; //
+let win = 0; //    does nothing lol
+let loss = 0; // 
 let points1 = 0; //actual score
 let points2 = 0; //actual score
+let halt = null;
 
 let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
 let pointsCounter2 = document.querySelector(".score2");
@@ -27,6 +28,8 @@ document.querySelector(".resetBtn").onclick = function reset() {
     points2 = 0;
     pointsCounter1.innerHTML = points1;
     pointsCounter2.innerHTML = points2;
+    p1Choice = "";
+    p2Choice = "";
 }
 
 
@@ -224,9 +227,9 @@ document.addEventListener("keyup", (keyPress2) =>  {
     }
 });
 document.onclick = function enableChecker() {
-// What to do after press.
+// Checker for debug
 if (enabled1 === false && enabled2 === false) {
-    console.log("count down")
+    console.log("enabled = false")
 
     } else {
         console.log("sitl wa" + enabled1 + enabled2);
@@ -238,8 +241,8 @@ function checkCountdown() { // To check if countdown should begin
     if(enabled1 === false && enabled2 === false) {
         console.log("3. 2 . 1")
         startCountdown();
-        enabled1 = true;
-        enabled2 = true;
+        enabled1 = halt;
+        enabled2 = halt;
     } else {
         console.log("oopsie")
     }
@@ -252,25 +255,25 @@ function startCountdown() {
 
 
     setTimeout(() => {
-        three.classList.add("timerOn")
+        //three.classList.add("timerOn")
         countAudio.play()
     }, 1000);
     setTimeout(() => {
-        three.classList.remove("timerOn")
+        //three.classList.remove("timerOn")
     }, 1500);
     setTimeout(() => {
-        two.classList.add("timerOn")
+        //two.classList.add("timerOn")
         countAudio2.play() //Same audio, they just cant stack so i need to variables for same audio sample
     }, 2000);
     setTimeout(() => {
-        two.classList.remove("timerOn")
+       // two.classList.remove("timerOn")
     }, 2500);
     setTimeout(() => {
-        one.classList.add("timerOn")
+        //one.classList.add("timerOn")
         countAudio.play()
     }, 3000);
     setTimeout(() => {
-        one.classList.remove("timerOn")
+        //one.classList.remove("timerOn")
         console.log(p1Choice + p2Choice)
     }, 3500);
     setTimeout(() =>{
@@ -284,6 +287,14 @@ function selectWinner() {
 
     let glowBox2 = document.querySelectorAll(".glowBox2");
     let player2Item = document.querySelectorAll(".player2Item")
+
+    let clap1 = document.querySelector(".clap1");
+    let clap2 = document.querySelector(".clap2");
+    
+    setTimeout(() => {
+        enabled1 = true;
+        enabled2 = true;
+    }, 500);
 
     console.log("selecting winner " +p1Choice)
 for (let a = 0; a < glowBox1.length; a++) {
@@ -330,18 +341,30 @@ if (p1Choice === "rock" && p2Choice === "paper") {
     pointsCounter2.innerHTML = points2;
     glowBox1[0].classList.remove("glow");
     glowBox2[1].classList.remove("glow");
+    clap2.classList.add("clap2On")
+    setTimeout(() => {
+        clap2.classList.remove("clap2On");
+    }, 1000);
 }
 if (p1Choice === "rock" && p2Choice === "scissor") {
     points1 += 1;
     pointsCounter1.innerHTML = points1;
     glowBox1[0].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
+    clap1.classList.add("clap1On")
+    setTimeout(() => {
+        clap1.classList.remove("clap1On");
+    }, 1000);
 }
 if(p1Choice === "paper" && p2Choice === "rock") {// 1 paper , 2 scissor 
     points1 += 1;
     pointsCounter1.innerHTML = points1;
     glowBox1[1].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
+    clap1.classList.add("clap1On")
+    setTimeout(() => {
+        clap1.classList.remove("clap1On");
+    }, 1000);
 }
 if(p1Choice === "paper" && p2Choice === "paper") {
     draw = true;
@@ -353,18 +376,31 @@ if (p1Choice === "paper" && p2Choice === "scissor") {
     pointsCounter2.innerHTML = points2;
     glowBox1[1].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
+    clap2.classList.add("clap2On")
+    setTimeout(() => {
+        clap2.classList.remove("clap2On");
+    }, 1000);
 }
 if (p1Choice === "scissor" && p2Choice == "rock") {
     points2 += 1;
     pointsCounter2.innerHTML = points2;
     glowBox1[2].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
+    clap2.classList.add("clap2On")
+    setTimeout(() => {
+        clap2.classList.remove("clap2On");
+    }, 1000);
 }
 if (p1Choice === "scissor" && p2Choice === "paper") {
     points1 += 1;
     pointsCounter1.innerHTML = points1;
     glowBox1[2].classList.remove("glow");
     glowBox2[1].classList.remove("glow");
+    clap1.classList.add("clap1On")
+    setTimeout(() => {
+        clap1.classList.remove("clap1On");
+    }, 1000);
+    
 }
 if (p1Choice === "scissor" && p2Choice === "scissor") {
     draw = true;

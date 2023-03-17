@@ -340,6 +340,7 @@ button {
     height: 85vh;
     justify-content: space-around;
     align-items: center;
+    background-color: rgb(45, 45, 45);
 }
 
 .rpsPlayer1Box, .rpsPlayer2Box {
@@ -388,10 +389,10 @@ button {
     bottom: 0;
     width: 0px;
     height: 0px;
-    background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+    background: linear-gradient(rgb(182, 244, 146), rgb(51, 139, 147));
     transition: 0.4s ease-in-out;
     border-top-right-radius: 100%;
-    z-index: -1;
+    z-index: 1;
     border-bottom-right-radius: 0%;
 }
 .backdrop2 {
@@ -403,7 +404,7 @@ button {
     background: linear-gradient(to right, rgb(244, 146, 146), rgb(147, 51, 51));
     transition: 0.4s ease-in-out;
     border-top-left-radius: 100%;
-    z-index: -1;
+    z-index: 1;
     border-bottom-left-radius: 0%;
 }
 .backdropPlay { /* Backdrop player 1 animation */
@@ -458,6 +459,7 @@ button {
 .character1 {
     transform: rotate(-35deg) scaleX(-1);
     left: -200px;
+    width: 20%;
 }
 .character2 {
     transform: rotate(30deg);
@@ -467,8 +469,9 @@ button {
 .character1, .character2 {
     position: fixed;
     font-size: 12rem;
-    bottom: -20vh;
+    bottom: -55vh;
     transition: ease-in-out 0.4s; 
+    z-index: 2;
 }
 .char1On {
     bottom: 0;
@@ -478,6 +481,42 @@ button {
     bottom: 0px;
     right: -20px;
 }
+.clap1, .clap2 {
+    transition: ease-out .5s;
+
+}
+.clap1 {
+    left: -30vw;
+    transform: scaleX(-1);
+    position: fixed;
+    animation-name: clapAni1;
+    animation-iteration-count: 1;
+    animation-duration: 0.5s;
+    animation-delay: 0.3s;
+}
+.clap2 {
+    right: -30vw;    
+    position: fixed;
+
+}
+.clap1On {
+    left: 0;
+}
+.clap2On {
+    right: 0;
+}
+@keyframes clapAni1 { /* Unused */
+    0% {
+        transform: rotate(30deg);
+    }
+    50% {
+
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
 
 .timerOn {
     font-size: 10rem;
