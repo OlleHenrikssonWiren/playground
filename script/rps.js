@@ -9,14 +9,18 @@ var selectionAudio1 = new Audio("../audio/rps/player1Select.mp3");
 var selectionAudio2 = new Audio("../audio/rps/player2Select.wav");
 var countAudio = new Audio("../audio/rps/countdown.ogg");
 var countAudio2 = new Audio("../audio/rps/countdown.ogg");
+var crowdAudio = new Audio("../audio/rps/crowdCheer.wav");
+var drumAudio = new Audio("../audio/rps/drumBeat.wav");
 let p1Choice = "";
 let p2Choice = "";
-let draw = 0; //
+let draw = false; // this might do some
 let win = 0; //    does nothing lol
 let loss = 0; // 
 let points1 = 0; //actual score
 let points2 = 0; //actual score
 let halt = null;
+gotPoints1 = false;
+gotPoints2 = false;
 
 let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
 let pointsCounter2 = document.querySelector(".score2");
@@ -24,14 +28,31 @@ let pointsCounter2 = document.querySelector(".score2");
 document.querySelector(".resetBtn").onclick = function reset() {
     enabled1 = true;
     enabled2 = true;
+    draw = false;
+    halt = null;
     points1 = 0;
     points2 = 0;
     pointsCounter1.innerHTML = points1;
     pointsCounter2.innerHTML = points2;
     p1Choice = "";
     p2Choice = "";
+    gotPoints1 = false;
+    gotPoints2 = false;
 }
+let charBtn = document.querySelectorAll(".circleBtn")
+for (let f = 0; f < charBtn.length; f++) {
+    charBtn[f].addEventListener("click", characterSelect);
+}
+function characterSelect() {
+    let player1Model = document.querySelector(".character1")
+    let player2Model = document.querySelector(".character2")
 
+
+            player1Model.src = "../imgs/chars/foxEmoji.png";
+            console.log("fox player 1")
+      
+
+}
 
 //Player "1" key regs.
 document.addEventListener("keyup", (keyPress) = function player1Press(keyPress)  {
@@ -252,33 +273,42 @@ function startCountdown() {
     let three = document.querySelector(".three");
     let two = document.querySelector(".two");
     let one = document.querySelector(".one");
+    let background1 = document.querySelector(".backdrop1");
+    let background2 = document.querySelector(".backdrop2");
+
+    let char1 = document.querySelector(".character1");
+    let char2 = document.querySelector(".character2");
 
 
     setTimeout(() => {
         //three.classList.add("timerOn")
-        countAudio.play()
+        drumAudio.play()
     }, 1000);
     setTimeout(() => {
         //three.classList.remove("timerOn")
+        background1.classList.add("backdropCount1"); // Animation for player 1 backdrop
+        background2.classList.add("backdropCount2");
+        char1.style.left = "-10vw"
+        char1.style.bottom = "-10vh"
+        char2.style.right = "-8vw"
+        char2.style.bottom = "-10vh"
+
+
     }, 1500);
     setTimeout(() => {
         //two.classList.add("timerOn")
-        countAudio2.play() //Same audio, they just cant stack so i need to variables for same audio sample
+        //Same audio, they just cant stack so i need to variables for same audio sample
     }, 2000);
     setTimeout(() => {
-       // two.classList.remove("timerOn")
-    }, 2500);
-    setTimeout(() => {
-        //one.classList.add("timerOn")
-        countAudio.play()
+
     }, 3000);
     setTimeout(() => {
         //one.classList.remove("timerOn")
         console.log(p1Choice + p2Choice)
-    }, 3500);
+    }, 2500);
     setTimeout(() =>{
         selectWinner();
-    }, 4000) 
+    }, 3000) 
 }
 
 function selectWinner() {
@@ -291,10 +321,10 @@ function selectWinner() {
     let clap1 = document.querySelector(".clap1");
     let clap2 = document.querySelector(".clap2");
     
-    setTimeout(() => {
+    setTimeout(() => { // Prevent players from spaming options
         enabled1 = true;
         enabled2 = true;
-    }, 500);
+    }, 4000);
 
     console.log("selecting winner " +p1Choice)
 for (let a = 0; a < glowBox1.length; a++) {
@@ -339,6 +369,8 @@ if (p1Choice === "rock" && p2Choice === "rock") {
 if (p1Choice === "rock" && p2Choice === "paper") {
     points2 += 1;
     pointsCounter2.innerHTML = points2;
+    gotPoints2 = true;
+
     glowBox1[0].classList.remove("glow");
     glowBox2[1].classList.remove("glow");
     clap2.classList.add("clap2On")
@@ -349,6 +381,8 @@ if (p1Choice === "rock" && p2Choice === "paper") {
 if (p1Choice === "rock" && p2Choice === "scissor") {
     points1 += 1;
     pointsCounter1.innerHTML = points1;
+    gotPoints1 = true;
+
     glowBox1[0].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
     clap1.classList.add("clap1On")
@@ -359,6 +393,8 @@ if (p1Choice === "rock" && p2Choice === "scissor") {
 if(p1Choice === "paper" && p2Choice === "rock") {// 1 paper , 2 scissor 
     points1 += 1;
     pointsCounter1.innerHTML = points1;
+    gotPoints1 = true;
+
     glowBox1[1].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
     clap1.classList.add("clap1On")
@@ -374,6 +410,8 @@ if(p1Choice === "paper" && p2Choice === "paper") {
 if (p1Choice === "paper" && p2Choice === "scissor") {
     points2 += 1;
     pointsCounter2.innerHTML = points2;
+    gotPoints2 = true;
+
     glowBox1[1].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
     clap2.classList.add("clap2On")
@@ -384,6 +422,8 @@ if (p1Choice === "paper" && p2Choice === "scissor") {
 if (p1Choice === "scissor" && p2Choice == "rock") {
     points2 += 1;
     pointsCounter2.innerHTML = points2;
+    gotPoints2 = true;
+
     glowBox1[2].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
     clap2.classList.add("clap2On")
@@ -394,6 +434,8 @@ if (p1Choice === "scissor" && p2Choice == "rock") {
 if (p1Choice === "scissor" && p2Choice === "paper") {
     points1 += 1;
     pointsCounter1.innerHTML = points1;
+    gotPoints1 = true;
+
     glowBox1[2].classList.remove("glow");
     glowBox2[1].classList.remove("glow");
     clap1.classList.add("clap1On")
@@ -406,7 +448,56 @@ if (p1Choice === "scissor" && p2Choice === "scissor") {
     draw = true;
     glowBox1[2].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
-}
-},1500);
     
+}
+    
+},1500);
+    setTimeout(() => {
+        playWinSeq();
+    }, 1500);
+}
+
+function playWinSeq() {
+    if (draw === true) {
+        null
+
+    } else {        
+        crowdAudio.volume = 0.3;
+        crowdAudio.play()
+    }
+    //Reseting characters and shit
+    let background1 = document.querySelector(".backdrop1");
+    let background2 = document.querySelector(".backdrop2");
+
+    let char1 = document.querySelector(".character1");
+    let char2 = document.querySelector(".character2");
+    
+    if(gotPoints1 === true) {
+        background1.classList.add("backdropCount1-2");
+        background2.classList.remove("backdropCount2");
+        char1.style.bottom = "5vh"
+    }
+    if(gotPoints2 === true) {
+        background2.classList.add("backdropCount2-2")
+        background1.classList.remove("backdropCount1")
+        char2.style.bottom = "5vh"
+    }
+
+    setTimeout(() => {
+    background1.classList.remove("backdropCount1"); // Animation for player 1 backdrop
+    background2.classList.remove("backdropCount2");
+
+    background1.classList.remove("backdropCount1-2");
+    background2.classList.remove("backdropCount2-2");
+    char1.style.left = ""
+    char1.style.bottom = ""
+    char2.style.right = ""
+    char2.style.bottom = ""
+    gotPoints1 = false;
+    gotPoints2 = false;
+    draw = false;
+
+    }, 2000);
+    
+
 }

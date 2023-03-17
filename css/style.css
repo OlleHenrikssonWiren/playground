@@ -419,6 +419,21 @@ button {
     border-top-left-radius: 80%;
     border-bottom-left-radius: 0%;
 }
+.backdropCount1, .backdropCount2 {
+    width: 25vw;
+    height: 50vh;
+}
+.backdropCount1-2, .backdropCount2-2 {
+    width: 35vw;
+    height: 70vh;
+}
+.characterCount1 {
+    left: -10vw;
+    bottom: 0;
+}
+.characterCount2 {
+    
+}
 .item {
     display: flex;
     align-items: center;
@@ -482,6 +497,7 @@ button {
     right: -20px;
 }
 .clap1, .clap2 {
+    z-index: 3;
     transition: ease-out .5s;
 
 }
@@ -522,6 +538,39 @@ button {
     font-size: 10rem;
 }
 
+.footerRPS {
+    width: 100vw;
+    display: flex;
+    position: fixed;
+    height: 10vh;
+    justify-content: center;
+    bottom: 0;
+}
+.footerRPSBox {
+    display: flex;
+    width: 60%;
+    height: 100%;
+    background-color:rgb(24, 24, 24);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+
+}
+.skinP1, .skinP2 {
+    text-align: center;
+}
+.circleBtn {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background-color: white;
+    margin-left: 10px;
+}
+.skinOptBox {
+    display: flex;
+}
 
 @keyframes tilt-shaking {
     0% { transform: rotate(0deg);
