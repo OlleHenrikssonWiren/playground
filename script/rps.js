@@ -3,8 +3,9 @@
 //document.onclick = function testEnabled() { // This is for debugging
  //   console.log(keyBtn)
 //}
-let enabled1 = true; // Toggle key regs for player 1
-let enabled2 = true; // Toggle Key regs for player 2 
+let halt = null; //Pause mechanic on key regs
+let enabled1 = halt; // Toggle key regs for player 1
+let enabled2 = halt; // Toggle Key regs for player 2 
 var selectionAudio1 = new Audio("../audio/rps/player1Select.mp3");
 var selectionAudio2 = new Audio("../audio/rps/player2Select.wav");
 var countAudio = new Audio("../audio/rps/countdown.ogg");
@@ -18,7 +19,7 @@ let win = 0; //    does nothing lol
 let loss = 0; // 
 let points1 = 0; //actual score
 let points2 = 0; //actual score
-let halt = null;
+
 gotPoints1 = false;
 gotPoints2 = false;
 currentChar1 = "";
@@ -26,17 +27,38 @@ currentChar2 = "";
 
 
 //Start Menu
+let footer = document.querySelector(".footerRPS");
+let footerBox = document.querySelector(".footerRPSBox");
+function setupPhaseEnd() {
+    if (currentChar1 !== "" && currentChar2 !== "") {
 
+    
+    footer.classList.add("closed")
+    footerBox.classList.add("closedBox")
+    setTimeout(() => {
+        enabled1 = true;
+        enabled2 = true;
+    }, 1000);
 
+    if(currentChar1 === "turkey" || currentChar2 === "turkey") {
+        callRandomFunction(list)
+    }
+    
+
+    } else {
+    console.log("sr")
+    }   
+}
 
 let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
 let pointsCounter2 = document.querySelector(".score2");
 
 document.querySelector(".resetBtn").onclick = function reset() {
-    enabled1 = true;
-    enabled2 = true;
+    
     draw = false;
     halt = null;
+    enabled1 = halt;
+    enabled2 = halt;
     points1 = 0;
     points2 = 0;
     pointsCounter1.innerHTML = points1;
@@ -45,11 +67,23 @@ document.querySelector(".resetBtn").onclick = function reset() {
     p2Choice = "";
     gotPoints1 = false;
     gotPoints2 = false;
-    CurrentChar1 = "";
-    CurrentChar2 = "";
+    currentChar1 = "";
+    currentChar2 = "";
 
+    footer.classList.remove("closed")
+    footerBox.classList.remove("closedBox")
 
-}// PLAYER 1 CHARCTER CHOICE
+    let button2 = document.querySelectorAll(".circleBtn2")
+        for (m = 0; m < button2.length; m++) {
+            button2[m].classList.remove("btnOn")
+    }
+    let button1 = document.querySelectorAll(".circleBtn1")
+    for (n = 0; n < button1.length; n++) {
+        button1[n].classList.remove("btnOn")
+    }
+}
+
+// PLAYER 1 CHARCTER CHOICE
 let charBtn1 = document.querySelectorAll(".circleBtn1") 
 for (let f = 0; f < charBtn1.length; f++) {
     charBtn1[f].addEventListener("click", characterSelect1);
@@ -57,28 +91,48 @@ for (let f = 0; f < charBtn1.length; f++) {
 function characterSelect1() { //Player 1
     let charBtn1 = f;
     let player1Model = document.querySelector(".character1")
+    let button1 = document.querySelectorAll(".circleBtn1")
     
 
+    if(currentChar1 === "") {
     switch (charBtn1) { //Kommer behövas uppdatera based on karaktär amount (player 1)
         case  0: //For player 1
     
             player1Model.src = "../imgs/chars/foxEmoji.png";
             console.log("fox player 1");
             currentChar1 = "fox";
-            characterFox()
+            for (n = 0; n < button1.length; n++) {
+                button1[0].classList.add("btnOn")
+            }
+            P1characterFox();
+            setupPhaseEnd();
         break;
 
         case 1:
             player1Model.src = "../imgs/chars/pigEmoji.png";
             console.log("pig player 1")
+            currentChar1 = "pig";
+            for (n = 0; n < button1.length; n++) {
+                button1[1].classList.add("btnOn")
+            }
+            //P1characterPig();
+            setupPhaseEnd();
         break;
 
         case 2:
             player1Model.src = "../imgs/chars/turkeyEmoji.png"
             console.log("turkey player 1")
+            currentChar1 = "turkey"
+            for (n = 0; n < button1.length; n++) {
+                button1[2].classList.add("btnOn")
+            }
+            //P1characterTurkey();
+            setupPhaseEnd();
         break;
     }
-    
+    } else {
+        console.log("already Locked")
+    }
 }
 }
 
@@ -91,25 +145,52 @@ for (let h = 0; h < charBtn2.length; h++) {
     function characterSelect2() {
         let player2Model = document.querySelector(".character2")
         let charBtn2 = h;
-        
+        let button2 = document.querySelectorAll(".circleBtn2")
+
+        if (currentChar2 === "") { // The if function is to prevent whever you already picked
         switch (charBtn2) {
         case 0:
             player2Model.src = "../imgs/chars/foxEmoji.png"
             console.log("fox player 2")
             currentChar2 = "fox";
-            characterFox();
+
+            
+            for (m = 0; m < button2.length; m++) {
+                button2[0].classList.add("btnOn")
+            }
+            P2characterFox();
+            setupPhaseEnd();
 
         break;
 
         case 1:
             player2Model.src = "../imgs/chars/pigEmoji.png";
             console.log("pig player 2")
+            currentChar2 = "pig";
+
+            for (m = 0; m < button2.length; m++) {
+                button2[1].classList.add("btnOn")
+            }
+            //P2characterPig();
+            setupPhaseEnd();
         break;
 
         case 2:
             player2Model.src = "../imgs/chars/turkeyEmoji.png"
             console.log("turkey player 1")
-        break;
+            currentChar2 = "turkey";
+
+        
+            for (m = 0; m < button2.length; m++) {
+                button2[2].classList.add("btnOn")
+            }
+            //P2characterTurkey();
+            setupPhaseEnd();
+        break;}
+        
+            
+    } else {
+        console.log("alrady Locked")
     }
     }
 }
@@ -129,6 +210,10 @@ document.addEventListener("keyup", (keyPress) = function player1Press(keyPress) 
             selectionAudio1.play(); //play audio on select
 
             p1Choice = "rock";
+            if (document.querySelector("#rock1").contains(document.querySelector(".turkeyImg")) ){
+                console.log("p1 rock into turkey")
+                p1Choice = "turkeyFood"
+            }
         break;
 
         case "w": // Code for W
@@ -228,7 +313,12 @@ document.addEventListener("keyup", (keyPress2) =>  {
             selectionAudio2.play(); 
             
             p2Choice = "rock";
-            
+            if (document.querySelector("#rock2").contains(document.querySelector(".turkeyImg")) ) {
+                console.log("p2 rock into turkey")
+                p2Choice = "turkeyFood"
+                console.log(p2Choice)
+                
+            }
         break;
 
         case "o":
@@ -385,6 +475,7 @@ function selectWinner() {
     setTimeout(() => { // Prevent players from spaming options
         enabled1 = true;
         enabled2 = true;
+        turkeyRemover();
     }, 4000);
 
     console.log("selecting winner " +p1Choice)
@@ -513,14 +604,47 @@ if (p1Choice === "scissor" && p2Choice === "scissor") {
     glowBox2[2].classList.remove("glow");
     
 }
-    
+
+//If turkey section
+if (p1Choice === "turkeyFood") {
+    points1 += 1;
+    pointsCounter1.innerHTML = points1;
+    glowBox1[0].classList.remove("glow");
+    glowBox2[0].classList.remove("glow");
+    glowBox2[1].classList.remove("glow");
+    glowBox2[2].classList.remove("glow");
+}
+if (p2Choice === "turkeyFood") {
+    points2 -= 2;
+    pointsCounter2.innerHTML = points2;
+    console.log(p2Choice + "far down")
+    glowBox1[0].classList.remove("glow");
+    glowBox1[1].classList.remove("glow");
+    glowBox1[2].classList.remove("glow");
+
+    glowBox2[0].classList.remove("glow");
+}
+if (p1Choice === "turkeyFood" && p2Choice === "turkeyFood") {
+    points1 -= 1;
+    pointsCounter1.innerHTML = points1;
+    pointsCounter2.innerHTML = points2;
+    glowBox1[0].classList.remove("glow");
+    glowBox2[0].classList.remove("glow");
+}    
+
+
+
 },1500);
     setTimeout(() => {
         playWinSeq();
+        console.log(p1Choice + " " + p2Choice + " LAST LAST")
     }, 1500);
 }
 
 function playWinSeq() {
+    if (p1Choice === "turkeyFood" || p2Choice === "turkeyFood") {
+        draw = true // Prevent celebration, turkey really just works like a draw but with a minus point
+    }
     if (draw === true) {
         null
 
@@ -528,6 +652,7 @@ function playWinSeq() {
         crowdAudio.volume = 0.3;
         crowdAudio.play()
     }
+
     //Reseting characters and shit
     let background1 = document.querySelector(".backdrop1");
     let background2 = document.querySelector(".backdrop2");
@@ -564,19 +689,232 @@ function playWinSeq() {
 
 
 
+//
+//
+// CHARACTER MENU HOVER FUNC
+//
+// Player 1
+let charOptBox1 = document.querySelectorAll(".skinOptBox1");
+for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
+
+    charOptBox1[charBox1].addEventListener("mouseenter", charHoverP1);
+    charOptBox1[charBox1].addEventListener("mouseleave", charLeaveP1);
+
+
+    
+    
+
+    function charHoverP1() {
+        let charDesc = document.querySelector(".charDesc1");
+        let charImg = document.querySelector(".charBigIcon1");
+        let charTitle = document.querySelector(".charTitle1")
+
+        switch (charBox1) {
+            case 0: 
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>FOX<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "Fox is cool test"
+            break;
+            
+            case 1:
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>PIG<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "Pig go oink"
+            break;
+
+            case 2:
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>TURKEY<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round randomly replace 1 of enemies options with a <span class=descSpan>turkey</span>."
+
+            let popupText = document.querySelector(".infoPopupText")
+            let popupBox = document.querySelector(".infoPopup")
+
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 to yourself no matter the combination."
+
+
+            for (let num = 0; num < popupText.length; num++) { 
+            popupText[num].addEventListener("mouseenter", Popup); 
+            }
+
+            
+            break;
+        }
+        
+    }
+
+    function charLeaveP1() {
+        let charImg = document.querySelector(".charBigIcon1");
+        let popupText = document.querySelector(".infoPopupText")
+        let popupBox = document.querySelector(".infoPopup")
+        let charDesc = document.querySelector(".charDesc1");
+        let charTitle = document.querySelector(".charTitle1");
+
+        
+        popupBox.style.visibility = "hidden"
+        
+
+    }
+}
+
+
+//// Player 2 VVVV
+let charOptBox2 = document.querySelectorAll(".skinOptBox2");
+for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
+
+    charOptBox2[charBox2].addEventListener("mouseenter", charHoverP2);
+    //charOptBox2[charBox2].addEventListener("mouseleave", charLeaveP2);
+
+    function charHoverP2() {
+        let charDesc = document.querySelector(".charDesc2");
+        let charImg = document.querySelector(".charBigIcon2");
+        let charTitle = document.querySelector(".charTitle2")  
+
+        switch (charBox2) {
+            case 0: 
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>FOX<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "Fox is cool test"
+            break;
+            
+            case 1:
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>PIG<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "Pig go oink"
+            break;
+
+            case 2:
+            console.log("hovering character fox");
+            charTitle.innerHTML = "<h4>TURKEY<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round randomly replace 1 of enemies options with a <span class=descSpan>turkey</span>."
+
+            let popupText = document.querySelector(".infoPopupText")
+            let popupBox = document.querySelector(".infoPopup")
+
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 to yourself no matter the combination."
+
+
+            for (let num = 0; num < popupText.length; num++) { 
+            popupText[num].addEventListener("mouseenter", Popup); 
+            }
+
+            
+            break;
+        }
+        
+    }
+}
+
 
 /// Charcter Tweaks and changes
 
 
 
 //WEEE
-function characterFox() {
+function P1characterFox() {
     if (currentChar1 === "fox") { // The first next point is +1 extra
         points1 += 1; 
         console.log("fox passive")
     }
-    if (currentChar2 === "fox") {
+  
+}  
+
+function P2characterFox() {
+if (currentChar2 === "fox") {
         points2 += 1;
         console.log("gigaChad")
     } 
 }
+
+
+
+
+
+
+// Information hovers 
+let popupText = document.querySelectorAll(".popupText")
+
+for (let num = 0; num < popupText.length; num++) { 
+popupText[num].addEventListener("mouseenter", Popup);
+
+function Popup() {
+    let infoPopupBox = document.querySelector(".infoPopup")
+    console.log("pop")
+    switch (x) {
+        case 0: 
+        infoPopupBox.style.visibility = "visible"
+        break;
+    } 
+    }
+
+}
+
+
+
+
+// Turkey RNG System 
+function turkeySuccess() {
+    console.log('Turkey Spawned')
+    if (currentChar1 === "turkey") {
+        let rock = document.querySelector("#rock2")
+        rock.innerHTML = "<img class=turkeyImg turkeySrc src=../imgs/icons/turkeyFood.png>"
+        if(p2Choice === "rock") 
+        p2Choice = "turkeyFood"
+    }
+  }
+  
+  function turkeyFail() {
+    console.log('Turkey Miss')
+    return;
+  }
+function turkeyRemover() {
+    if (p1Choice === "turkeyFood" || p2Choice === "turkeyFood") {
+    let rock1 = document.querySelector("#rock2")
+    let rock2 = document.querySelector("#rock1")
+    p1Choice = "rock"
+    p2Choice = "rock"
+    
+    console.log("turkey effect cleared")
+    rock1.innerHTML = "&#129704;"
+    rock2.innerHTML = "&#129704;"
+    }
+}
+  
+  
+  var list = [
+    {chance: 0.9, func: turkeySuccess}, // 10% chance to spawn.
+    {chance: 1, func: turkeyFail},
+  ];
+  
+  function callRandomFunction(list) {
+    var rand = Math.random() // get a random number between 0 and 1
+    var accumulatedChance = 0 // used to figure out the current
+  
+    var found = list.find(function(element) { // iterate through all elements 
+      accumulatedChance += element.chance // accumulate the chances
+      return accumulatedChance >= rand // tests if the element is in the range and if yes this item is stored in 'found'
+    })
+  
+    if( found ) {
+      console.log('match found for: ' + rand)
+      found.func()
+    } else {
+      console.log('no match found for: ' + rand)
+    }
+  }
+  
+  
