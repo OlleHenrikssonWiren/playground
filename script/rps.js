@@ -21,6 +21,13 @@ let points2 = 0; //actual score
 let halt = null;
 gotPoints1 = false;
 gotPoints2 = false;
+currentChar1 = "";
+currentChar2 = "";
+
+
+//Start Menu
+
+
 
 let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
 let pointsCounter2 = document.querySelector(".score2");
@@ -38,21 +45,75 @@ document.querySelector(".resetBtn").onclick = function reset() {
     p2Choice = "";
     gotPoints1 = false;
     gotPoints2 = false;
-}
-let charBtn = document.querySelectorAll(".circleBtn")
-for (let f = 0; f < charBtn.length; f++) {
-    charBtn[f].addEventListener("click", characterSelect);
-}
-function characterSelect() {
+    CurrentChar1 = "";
+    CurrentChar2 = "";
+
+
+}// PLAYER 1 CHARCTER CHOICE
+let charBtn1 = document.querySelectorAll(".circleBtn1") 
+for (let f = 0; f < charBtn1.length; f++) {
+    charBtn1[f].addEventListener("click", characterSelect1);
+    
+function characterSelect1() { //Player 1
+    let charBtn1 = f;
     let player1Model = document.querySelector(".character1")
-    let player2Model = document.querySelector(".character2")
+    
 
-
+    switch (charBtn1) { //Kommer behövas uppdatera based on karaktär amount (player 1)
+        case  0: //For player 1
+    
             player1Model.src = "../imgs/chars/foxEmoji.png";
-            console.log("fox player 1")
-      
+            console.log("fox player 1");
+            currentChar1 = "fox";
+            characterFox()
+        break;
 
+        case 1:
+            player1Model.src = "../imgs/chars/pigEmoji.png";
+            console.log("pig player 1")
+        break;
+
+        case 2:
+            player1Model.src = "../imgs/chars/turkeyEmoji.png"
+            console.log("turkey player 1")
+        break;
+    }
+    
 }
+}
+
+//PLAYER 2 CHARACTER CHOICE
+let charBtn2 = document.querySelectorAll(".circleBtn2");
+
+for (let h = 0; h < charBtn2.length; h++) {
+    charBtn2[h].addEventListener("click", characterSelect2);
+
+    function characterSelect2() {
+        let player2Model = document.querySelector(".character2")
+        let charBtn2 = h;
+        
+        switch (charBtn2) {
+        case 0:
+            player2Model.src = "../imgs/chars/foxEmoji.png"
+            console.log("fox player 2")
+            currentChar2 = "fox";
+            characterFox();
+
+        break;
+
+        case 1:
+            player2Model.src = "../imgs/chars/pigEmoji.png";
+            console.log("pig player 2")
+        break;
+
+        case 2:
+            player2Model.src = "../imgs/chars/turkeyEmoji.png"
+            console.log("turkey player 1")
+        break;
+    }
+    }
+}
+
 
 //Player "1" key regs.
 document.addEventListener("keyup", (keyPress) = function player1Press(keyPress)  {
@@ -255,7 +316,7 @@ if (enabled1 === false && enabled2 === false) {
     } else {
         console.log("sitl wa" + enabled1 + enabled2);
     }
-}<
+}
     document.addEventListener("keyup", checkCountdown);
 
 function checkCountdown() { // To check if countdown should begin
@@ -310,7 +371,7 @@ function startCountdown() {
         selectWinner();
     }, 3000) 
 }
-
+ //what do to after both have chosen option
 function selectWinner() {
     let player1Item = document.querySelectorAll(".player1Item");
     let glowBox1 = document.querySelectorAll(".glowBox1");
@@ -360,6 +421,8 @@ for (let a = 0; a < glowBox1.length; a++) {
         }
     }
 
+
+    //Point Handout System
 setTimeout(() => {
 if (p1Choice === "rock" && p2Choice === "rock") {
     draw = true;
@@ -496,8 +559,24 @@ function playWinSeq() {
     gotPoints1 = false;
     gotPoints2 = false;
     draw = false;
-
     }, 2000);
-    
+}
 
+
+
+
+/// Charcter Tweaks and changes
+
+
+
+//WEEE
+function characterFox() {
+    if (currentChar1 === "fox") { // The first next point is +1 extra
+        points1 += 1; 
+        console.log("fox passive")
+    }
+    if (currentChar2 === "fox") {
+        points2 += 1;
+        console.log("gigaChad")
+    } 
 }

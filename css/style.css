@@ -548,7 +548,7 @@ button {
 }
 .footerRPSBox {
     display: flex;
-    width: 60%;
+    width: 40%;
     height: 100%;
     background-color:rgb(24, 24, 24);
     border-top-right-radius: 10px;
@@ -566,12 +566,13 @@ button {
     height: 16px;
     border-radius: 100%;
     background-color: white;
-    margin-left: 10px;
+    margin-left: 16px;
 }
 .skinOptBox {
     display: flex;
-}
+    justify-content: space-between;
 
+}
 @keyframes tilt-shaking {
     0% { transform: rotate(0deg);
         font-size: 5.0rem; 
