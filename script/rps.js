@@ -31,6 +31,7 @@ currentChar2 = "";
 let footer = document.querySelector(".footerRPS");
 let footerBox = document.querySelector(".footerRPSBox");
 let popupBox = document.querySelector(".infoPopup");
+let bestOfMenu = document.querySelector(".bestOfMenu");
 function setupPhaseEnd() {
     if (currentChar1 !== "" && currentChar2 !== "") {
 
@@ -38,7 +39,7 @@ function setupPhaseEnd() {
     footer.classList.add("closed")
     footerBox.classList.add("closedBox")
     popupBox.style.visibility = "hidden"
-
+    bestOfMenu.style.visibility = "hidden"
     
     setTimeout(() => {
         enabled1 = true;
@@ -964,7 +965,7 @@ function turkeyRemover() {
   
   
   var list = [
-    {chance: 0.8, func: turkeySuccess}, // 10% chance to spawn.
+    {chance: 0.15, func: turkeySuccess}, // 15% chance to spawn.
     {chance: 1, func: turkeyFail},
   ];
   
