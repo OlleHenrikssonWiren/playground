@@ -12,6 +12,7 @@ var countAudio = new Audio("../audio/rps/countdown.ogg");
 var countAudio2 = new Audio("../audio/rps/countdown.ogg");
 var crowdAudio = new Audio("../audio/rps/crowdCheer.wav");
 var drumAudio = new Audio("../audio/rps/drumBeat.wav");
+var chickenScreamAudio = new Audio("../audio/rps/chickenScream.wav")
 let p1Choice = "";
 let p2Choice = "";
 let draw = false; // this might do some
@@ -69,7 +70,7 @@ document.querySelector(".resetBtn").onclick = function reset() {
     gotPoints2 = false;
     currentChar1 = "";
     currentChar2 = "";
-
+    turkeyRemover();
     footer.classList.remove("closed")
     footerBox.classList.remove("closedBox")
 
@@ -121,6 +122,7 @@ function characterSelect1() { //Player 1
 
         case 2:
             player1Model.src = "../imgs/chars/turkeyEmoji.png"
+            player1Model.backgroundPositionY = "0"
             console.log("turkey player 1")
             currentChar1 = "turkey"
             for (n = 0; n < button1.length; n++) {
@@ -306,19 +308,20 @@ document.addEventListener("keyup", (keyPress2) =>  {
 
     if (enabled2 === true) {
         switch (keyBtn2) {
-        case "i": //Code for left arrow
+        case "i": //Code for "i"
             console.log(keyBtn2 + "y");
             SelectDone();
             playSelectAni();
             selectionAudio2.play(); 
             
             p2Choice = "rock";
-            if (document.querySelector("#rock2").contains(document.querySelector(".turkeyImg")) ) {
+            if (document.getElementById("rock2").contains(document.querySelector(".turkeyImg2")) ) {
                 console.log("p2 rock into turkey")
                 p2Choice = "turkeyFood"
-                console.log(p2Choice)
+                console.log(p2Choice)   
                 
             }
+            console.log(p2Choice + " test")
         break;
 
         case "o":
@@ -471,18 +474,19 @@ function selectWinner() {
 
     let clap1 = document.querySelector(".clap1");
     let clap2 = document.querySelector(".clap2");
-    turkeyRemover();
+    
     setTimeout(() => { // Prevent players from spaming options
         enabled1 = true;
         enabled2 = true;
-        
+        turkeyRemover();
         if(currentChar1 === "turkey" || currentChar2 === "turkey") {
             callRandomFunction(list)
         }
     }, 4000);
 
-    console.log("selecting winner " +p1Choice)
+    console.log("selecting winner " + p1Choice)
 for (let a = 0; a < glowBox1.length; a++) {
+    console.log(p1Choice)
     switch (p1Choice) {
         case "rock":
             console.log("rock glow")
@@ -497,6 +501,9 @@ for (let a = 0; a < glowBox1.length; a++) {
             glowBox1[2].classList.add("glow");
         break;
 
+        case "turkeyFood":
+            glowBox1[0].classList.add("glow");
+        break;
         }
     }
 
@@ -504,6 +511,7 @@ for (let a = 0; a < glowBox1.length; a++) {
         switch (p2Choice) {
             case "rock":
                 glowBox2[0].classList.add("glow");
+                console.log("player 2 rock")
             break;
 
             case "paper":
@@ -512,6 +520,13 @@ for (let a = 0; a < glowBox1.length; a++) {
 
             case "scissor":
                 glowBox2[2].classList.add("glow");
+            
+            break;
+
+            case "turkeyFood": 
+                glowBox2[0].classList.add("glow");
+                console.log("player 2 turkey")
+            break;
         }
     }
 
@@ -576,7 +591,7 @@ if (p1Choice === "paper" && p2Choice === "scissor") {
         clap2.classList.remove("clap2On");
     }, 1000);
 }
-if (p1Choice === "scissor" && p2Choice == "rock") {
+if (p1Choice === "scissor" && p2Choice === "rock") {
     points2 += 1;
     pointsCounter2.innerHTML = points2;
     gotPoints2 = true;
@@ -610,30 +625,59 @@ if (p1Choice === "scissor" && p2Choice === "scissor") {
 
 //If turkey section
 if (p1Choice === "turkeyFood") {
-    points1 += 1;
-    pointsCounter1.innerHTML = points1;
     glowBox1[0].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
     glowBox2[1].classList.remove("glow");
     glowBox2[2].classList.remove("glow");
 }
 if (p2Choice === "turkeyFood") {
-    points2 -= 2;
-    pointsCounter2.innerHTML = points2;
     console.log(p2Choice + "far down")
     glowBox1[0].classList.remove("glow");
     glowBox1[1].classList.remove("glow");
     glowBox1[2].classList.remove("glow");
-
     glowBox2[0].classList.remove("glow");
+    glowBox2[1].classList.remove("glow");
+    glowBox2[2].classList.remove("glow");
+    
 }
 if (p1Choice === "turkeyFood" && p2Choice === "turkeyFood") {
     points1 -= 1;
+    points2 -= 1;
     pointsCounter1.innerHTML = points1;
     pointsCounter2.innerHTML = points2;
     glowBox1[0].classList.remove("glow");
     glowBox2[0].classList.remove("glow");
 }    
+if(p2Choice === "turkeyFood" && p1Choice === "rock") {
+    points2 -= 1;
+    pointsCounter2.innerHTML = points2
+
+}
+if(p2Choice === "turkeyFood" && p1Choice === "scissor") {
+    points2 -= 1;
+    pointsCounter2.innerHTML = points2
+    
+}
+if(p2Choice === "turkeyFood" && p1Choice === "paper") {
+    points2 -= 1;
+    pointsCounter2.innerHTML = points2
+    console.log("what?")
+
+}
+if(p1Choice === "turkeyFood" && p2Choice === "paper") {
+    points1 -= 1;
+    pointsCounter1.innerHTML = points1
+    
+}
+if(p1Choice === "turkeyFood" && p2Choice === "scissor") {
+    points1 -= 1;
+    pointsCounter1.innerHTML = points1
+}
+if(p1Choice === "turkeyFood" && p2Choice === "rock") {
+    points1 -= 1;
+    pointsCounter1.innerHTML = points1;
+}
+
 
 
 
@@ -874,9 +918,27 @@ function turkeySuccess() {
     console.log('Turkey Spawned')
     if (currentChar1 === "turkey") {
         let rock = document.querySelector("#rock2")
-        rock.innerHTML = "<img class=turkeyImg turkeySrc src=../imgs/icons/turkeyFood.png>"
-        if(p2Choice === "rock") 
-        p2Choice = "turkeyFood"
+        let feather = document.querySelector(".featherAni2")
+        setTimeout(() => {
+        rock.innerHTML = "<img class=turkeyImg2 src=../imgs/icons/turkeyFood.png>"
+        feather.classList.add("featherAniOn")  
+        chickenScreamAudio.play()
+        }, 800);
+        setTimeout(() => { // To remove the animation for next round
+        feather.classList.remove("featherAniOn")  
+        }, 3000);
+        
+        
+        if(p2Choice === "rock") {
+            p2Choice = "turkeyFood"
+        }
+    }
+    if (currentChar2 === "turkey") {
+        let rock = document.querySelector("#rock1");
+        rock.innerHTML = "<img class=turkeyImg src=../imgs/icons/turkeyFood.png>"
+        if(p1Choice === "rock") {
+            p1Choice = "turkeyFood"
+        }
     }
   }
   
@@ -891,15 +953,14 @@ function turkeyRemover() {
     p1Choice = "rock"
     p2Choice = "rock"
     
-    console.log("turkey effect cleared")
+    }console.log("turkey effect cleared")
     rock1.innerHTML = "&#129704;"
     rock2.innerHTML = "&#129704;"
-    }
 }
   
   
   var list = [
-    {chance: 0.3, func: turkeySuccess}, // 10% chance to spawn.
+    {chance: 0.8, func: turkeySuccess}, // 10% chance to spawn.
     {chance: 1, func: turkeyFail},
   ];
   
