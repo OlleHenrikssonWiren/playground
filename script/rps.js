@@ -20,6 +20,7 @@ let win = 0; //    does nothing lol
 let loss = 0; // 
 let points1 = 0; //actual score
 let points2 = 0; //actual score
+let firstToMode = "";
 
 gotPoints1 = false;
 gotPoints2 = false;
@@ -59,7 +60,7 @@ function setupPhaseEnd() {
 let pointsCounter1 = document.querySelector(".score1"); // Textbox for score
 let pointsCounter2 = document.querySelector(".score2");
 
-document.querySelector(".resetBtn").onclick = function reset() {
+function endGame() {
     
     draw = false;
     halt = null;
@@ -76,6 +77,8 @@ document.querySelector(".resetBtn").onclick = function reset() {
     currentChar1 = "";
     currentChar2 = "";
     turkeyRemover();
+    firstToMode = "";
+    bestOfMenu.style.visibility = "visible"
     footer.classList.remove("closed")
     footerBox.classList.remove("closedBox")
 
@@ -86,6 +89,10 @@ document.querySelector(".resetBtn").onclick = function reset() {
     let button1 = document.querySelectorAll(".circleBtn1")
     for (n = 0; n < button1.length; n++) {
         button1[n].classList.remove("btnOn")
+    }
+    let firstToButton = document.querySelectorAll(".bestNum")
+    for (let ftBtnNum = 0; ftBtnNum < firstToButton.length; ftBtnNum++) {  
+        firstToButton[ftBtnNum].classList.remove("firstToBtnOn");
     }
 }
 
@@ -480,13 +487,42 @@ function selectWinner() {
     let clap1 = document.querySelector(".clap1");
     let clap2 = document.querySelector(".clap2");
     
-    setTimeout(() => { // Prevent players from spaming options
+    setTimeout(() => { // Prevent players from spaming options // this timout is to delay the resetting process after distributed points
         enabled1 = true;
         enabled2 = true;
         turkeyRemover();
+        firstTo();
+        console.log("first to triggered")
         if(currentChar1 === "turkey" || currentChar2 === "turkey") { //Reload RNG system after a round
-            callRandomFunction(list)
-        }
+            if (firstToMode === "3" || firstToMode === "5" || firstToMode === "10") {
+                switch (firstToMode) {
+                    case "3":
+                        if (points1 === 3 || points2 === 3) {
+                            return;
+                        } else {
+                            callRandomFunction(list)
+                        }
+                    break;
+
+                    case "5":
+                        if (points1 === 5 || points2 === 5) {
+                            return;
+                        } else {
+                            callRandomFunction(list)
+                        }
+                    break;
+
+                    case "10":
+                        if (points1 === 10 || points2 === 10) {
+                            return;
+                        } 
+                    break;
+                }
+            } else {
+                callRandomFunction(list)
+            }
+        } 
+        
     }, 4000);
 
     console.log("selecting winner " + p1Choice)
@@ -715,12 +751,12 @@ function playWinSeq() {
     if(gotPoints1 === true) {
         background1.classList.add("backdropCount1-2");
         background2.classList.remove("backdropCount2");
-        char1.style.bottom = "5vh"
+        char1.style.bottom = "5vh";
     }
     if(gotPoints2 === true) {
-        background2.classList.add("backdropCount2-2")
-        background1.classList.remove("backdropCount1")
-        char2.style.bottom = "5vh"
+        background2.classList.add("backdropCount2-2");
+        background1.classList.remove("backdropCount1");
+        char2.style.bottom = "5vh";
     }
 
     setTimeout(() => {
@@ -729,10 +765,10 @@ function playWinSeq() {
 
     background1.classList.remove("backdropCount1-2");
     background2.classList.remove("backdropCount2-2");
-    char1.style.left = ""
-    char1.style.bottom = ""
-    char2.style.right = ""
-    char2.style.bottom = ""
+    char1.style.left = "";
+    char1.style.bottom = "";
+    char2.style.right = "";
+    char2.style.bottom = "";
     gotPoints1 = false;
     gotPoints2 = false;
     draw = false;
@@ -767,11 +803,11 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>FOX<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "Fox is cool test"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span> The first point won is +2 instead of +1."
             break;
             
             case 1:
-            console.log("hovering character fox");
+            console.log("hovering character pig");
             charTitle.innerHTML = "<h4>PIG<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
             charImg.style.marginLeft = "0"
@@ -779,7 +815,7 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             break;
 
             case 2:
-            console.log("hovering character fox");
+            console.log("hovering character turkey");
             charTitle.innerHTML = "<h4>TURKEY<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
             charImg.style.marginLeft = "0"
@@ -835,11 +871,11 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>FOX<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "Fox is cool test"
+            charDesc.innerHTML = "The first point won is +2 instead of +1."
             break;
             
             case 1:
-            console.log("hovering character fox");
+            console.log("hovering character pig");
             charTitle.innerHTML = "<h4>PIG<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
             charImg.style.marginLeft = "0"
@@ -847,7 +883,7 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             break;
 
             case 2:
-            console.log("hovering character fox");
+            console.log("hovering character turkey");
             charTitle.innerHTML = "<h4>TURKEY<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
             charImg.style.marginLeft = "0"
@@ -895,8 +931,6 @@ if (currentChar2 === "fox") {
 
 
 
-
-
 // Information hovers 
 let popupText = document.querySelectorAll(".popupText")
 
@@ -910,12 +944,76 @@ function Popup() {
         case 0: 
         infoPopupBox.style.visibility = "visible"
         break;
-    } 
+        } 
     }
 
 }
 
 
+//"First To" functions
+function firstTo() {
+    if (firstToMode === "3") {
+        if (points1 === 3 || points2 === 3 ) {
+            endGame();
+        }
+    }
+    if (firstToMode === "5") {
+        if (points1 === 5 || points2 === 5) {
+            endGame();
+        }
+    }
+    if (firstToMode === "10") {
+        if (points1 === 10 || points2 === 10) {
+            endGame();
+        }
+    }
+}
+//"first to" eventlisteners
+let firstToButton = document.querySelectorAll(".bestNum")
+for (let ftBtnNum = 0; ftBtnNum < firstToButton.length; ftBtnNum++) {
+    firstToButton[ftBtnNum].addEventListener("click", firstToListen)
+
+function firstToListen() {
+        switch (ftBtnNum) {
+            case 0:
+                firstToMode = "3";
+                console.log(firstToMode)
+                firstToButton[0].classList.add("firstToBtnOn")
+                firstToButton[1].classList.remove("firstToBtnOn")
+                firstToButton[2].classList.remove("firstToBtnOn")
+                firstToButton[3].classList.remove("firstToBtnOn")
+            break;
+
+            case 1:
+                firstToMode = "5";
+                console.log(firstToMode)
+                firstToButton[1].classList.add("firstToBtnOn")
+                firstToButton[0].classList.remove("firstToBtnOn")
+                firstToButton[2].classList.remove("firstToBtnOn")
+                firstToButton[3].classList.remove("firstToBtnOn")
+            break;
+
+            case 2:
+                firstToMode = "10";
+                console.log(firstToMode)
+                firstToButton[2].classList.add("firstToBtnOn")
+                firstToButton[1].classList.remove("firstToBtnOn")
+                firstToButton[0].classList.remove("firstToBtnOn")
+                firstToButton[3].classList.remove("firstToBtnOn")
+            break;
+            case 3: 
+                firstToMode = "";
+                console.log(firstToMode)
+                firstToButton[3].classList.add("firstToBtnOn")
+                firstToButton[0].classList.remove("firstToBtnOn")
+                firstToButton[1].classList.remove("firstToBtnOn")
+                firstToButton[2].classList.remove("firstToBtnOn")
+            default:
+                return;
+            break;
+        }
+    }
+}
 
 
 // Turkey RNG System 
@@ -965,7 +1063,7 @@ function turkeyRemover() {
   
   
   var list = [
-    {chance: 0.15, func: turkeySuccess}, // 15% chance to spawn.
+    {chance: 0.1, func: turkeySuccess}, // 15% chance to spawn.
     {chance: 1, func: turkeyFail},
   ];
   

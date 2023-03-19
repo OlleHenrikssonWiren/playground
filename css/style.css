@@ -716,7 +716,7 @@ button {
     top: 50%;
     text-align: center;
     background-color: #2d2d2d;
-    height: 15vh;
+    height: 22vh;
     width: 15vw;
     justify-content: center;
     display: flex;
@@ -737,6 +737,21 @@ button {
 .bestOfMenu p {
     font-style: italic;
 }
+.firstToBtnOn { /* Formerly known as best of */
+    background: radial-gradient(circle at -3.3% 48%, rgb(141, 146, 239) 0%, rgb(99, 229, 254) 90%);
+}
+.bestOfUnderBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#bestNumNone {
+    width: 100px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .bestNum {
     cursor: pointer;
     user-select: none;
@@ -749,6 +764,7 @@ button {
     border-radius: 100%;
     border: 5px solid #181818;
     inset: -5px;
+    transition: ease 0.2s;
 }
 .bestNum:hover {
     background-color: #2d2d2d;
