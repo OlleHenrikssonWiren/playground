@@ -30,12 +30,16 @@ currentChar2 = "";
 //Start Menu
 let footer = document.querySelector(".footerRPS");
 let footerBox = document.querySelector(".footerRPSBox");
+let popupBox = document.querySelector(".infoPopup");
 function setupPhaseEnd() {
     if (currentChar1 !== "" && currentChar2 !== "") {
 
     
     footer.classList.add("closed")
     footerBox.classList.add("closedBox")
+    popupBox.style.visibility = "hidden"
+
+    
     setTimeout(() => {
         enabled1 = true;
         enabled2 = true;
@@ -479,7 +483,7 @@ function selectWinner() {
         enabled1 = true;
         enabled2 = true;
         turkeyRemover();
-        if(currentChar1 === "turkey" || currentChar2 === "turkey") {
+        if(currentChar1 === "turkey" || currentChar2 === "turkey") { //Reload RNG system after a round
             callRandomFunction(list)
         }
     }, 4000);
