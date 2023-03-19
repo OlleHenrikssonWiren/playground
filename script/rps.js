@@ -471,11 +471,14 @@ function selectWinner() {
 
     let clap1 = document.querySelector(".clap1");
     let clap2 = document.querySelector(".clap2");
-    
+    turkeyRemover();
     setTimeout(() => { // Prevent players from spaming options
         enabled1 = true;
         enabled2 = true;
-        turkeyRemover();
+        
+        if(currentChar1 === "turkey" || currentChar2 === "turkey") {
+            callRandomFunction(list)
+        }
     }, 4000);
 
     console.log("selecting winner " +p1Choice)
@@ -896,7 +899,7 @@ function turkeyRemover() {
   
   
   var list = [
-    {chance: 0.9, func: turkeySuccess}, // 10% chance to spawn.
+    {chance: 0.3, func: turkeySuccess}, // 10% chance to spawn.
     {chance: 1, func: turkeyFail},
   ];
   
