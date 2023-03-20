@@ -150,6 +150,26 @@ function characterSelect1() { //Player 1
             //P1characterTurkey();
             setupPhaseEnd();
         break;
+
+        case 3:
+            player1Model.src = "../imgs/chars/microbeEmoji.png"
+            console.log("microbe player 1")
+            currentChar1 = "microbe"
+            for (n = 0; n < button1.length; n++) {
+                button1[3].classList.add("btnOn")
+            }
+            setupPhaseEnd();
+        break;
+
+        case 4:
+            player1Model.src = "../imgs/chars/camelEmoji.png"
+            console.log("camel player 1")
+            currentChar1 = "camel"
+            for (n = 0; n < button1.length; n++) {
+                button1[4].classList.add("btnOn")
+            }
+            setupPhaseEnd();
+        break;
     }
     } else {
         console.log("already Locked")
@@ -198,7 +218,7 @@ for (let h = 0; h < charBtn2.length; h++) {
 
         case 2:
             player2Model.src = "../imgs/chars/turkeyEmoji.png"
-            console.log("turkey player 1")
+            console.log("turkey player 2")
             currentChar2 = "turkey";
 
         
@@ -207,7 +227,28 @@ for (let h = 0; h < charBtn2.length; h++) {
             }
             //P2characterTurkey();
             setupPhaseEnd();
-        break;}
+        break;
+    
+        case 3:
+            player2Model.src = "../imgs/chars/microbeEmoji.png"
+            console.log("microbe player 2")
+            currentChar2 = "microbe"
+            for (m = 0; m < button2.length; m++) {
+                button2[3].classList.add("btnOn")
+            }
+            setupPhaseEnd();
+        break;
+
+        case 4:
+            player2Model.src = "../imgs/chars/camelEmoji.png"
+            console.log("camel player 2")
+            currentChar2 = "camel"
+            for (m = 0; m < button2.length; m++) {
+                button2[4].classList.add("btnOn")
+            }
+            setupPhaseEnd();
+        break;
+    }
         
             
     } else {
@@ -848,6 +889,22 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
 
             
             break;
+
+            case 3: 
+            console.log("hovering character microbe");
+            charTitle.innerHTML = "<h4>MICROBE<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/microbeEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>The</div>"      
+            break;      
+
+            case 4: 
+            console.log("hovering character camel");
+            charTitle.innerHTML = "<h4>CAMEL<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>bruh</div>"      
+            break;  
         }
         
     }
@@ -918,8 +975,22 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             for (let num = 0; num < popupText.length; num++) { 
             popupText[num].addEventListener("mouseenter", Popup); 
             }
+            break;
 
-            
+            case 3:
+            console.log("hovering character microbe");
+            charTitle.innerHTML = "<h4>MICROBE<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/microbeEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>The</div>"    
+            break;
+
+            case 4:
+            console.log("hovering character camel");
+            charTitle.innerHTML = "<h4>CAMEL<h4>";
+            charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
+            charImg.style.marginLeft = "0"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>drought</div>"    
             break;
         }
         

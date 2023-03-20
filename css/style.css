@@ -687,6 +687,9 @@ button {
     margin-left: 16px;
     transition: ease 0.2s
 }
+.circleBtn:hover {
+    border:  2px rgb(255, 255, 255) solid;
+}
 .skinOptBox {
     display: flex;
     justify-content: space-between;
