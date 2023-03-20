@@ -803,7 +803,7 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>FOX<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span> The first point won is +2 instead of +1."
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span> The first point(s) won is +2 instead of +1."
             break;
             
             case 1:
@@ -825,7 +825,7 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             let popupBox = document.querySelector(".infoPopup")
 
             popupBox.style.visibility = "visible"
-            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 to yourself no matter the combination."
+            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 point(s) to yourself no matter the combination."
 
 
             for (let num = 0; num < popupText.length; num++) { 
@@ -871,7 +871,7 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>FOX<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "The first point won is +2 instead of +1."
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span> The first point(s) won is +2 instead of +1."
             break;
             
             case 1:
@@ -893,7 +893,7 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             let popupBox = document.querySelector(".infoPopup")
 
             popupBox.style.visibility = "visible"
-            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 to yourself no matter the combination."
+            popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 point(s) to yourself no matter the combination."
 
 
             for (let num = 0; num < popupText.length; num++) { 

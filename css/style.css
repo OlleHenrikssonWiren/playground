@@ -557,8 +557,8 @@ button {
 }
 .btnOn {
     background: radial-gradient(circle at -3.3% 48%, rgb(141, 146, 239) 0%, rgb(99, 229, 254) 90%);
-    outline: solid 2px rgb(255, 255, 255);
-    outline-offset: -2px;
+    border:#2d2d2d solid 4px;
+    inset: -4px;
     
 }
 .footerRPSBox h4{
@@ -668,10 +668,10 @@ button {
     font-style: italic;
 }
 .circleBtn {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     border-radius: 100%;
-    background-color: white;
+    background-color:#2d2d2d;
     margin-left: 16px;
     transition: ease 0.2s
 }
