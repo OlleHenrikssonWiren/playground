@@ -483,7 +483,8 @@ button {
 }
 .character1, .character2 {
     position: fixed;
-    font-size: 12rem;
+    width: 400px;
+    height: 400px;
     bottom: -55vh;
     transition: ease-in-out 0.4s; 
     z-index: 2;
@@ -645,9 +646,20 @@ button {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 21vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
-.charDesc {
-    width: 100%;
+.charDesc1, .charDesc2 {
+    width: 80%;
+}
+.charTitle1, .charTitle2 {
+    letter-spacing: 3px;
+    font-size: 1.33rem;
+}
+.descItalic {
+    font-style: italic;
+    padding-top: 16px;
 }
 .infoPopup {
     width: 20vw;
@@ -708,6 +720,41 @@ button {
     100% { transform: rotate(0deg); 
         font-size: 5.0rem;
     }  
+} /* for future stuff */
+.flyingLine {
+    z-index: 12;
+    width: 100px;
+    height: 3px;
+    background-color: white;
+}
+.pigBoost {
+    position: absolute;
+    top: 12vh;
+    font-size: 0px;
+    transform: rotate(30deg);
+    background: linear-gradient(110.3deg, rgb(238, 179, 123) 8.7%, rgb(216, 103, 77) 47.5%, rgb(114, 43, 54) 89.1%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform-origin: -50%, -50%;
+    text-align: center;
+    font-weight: bold;
+    
+}
+.pigBoostOn {
+    animation-name: pigBoostAni;
+    animation-iteration-count: 1;
+    animation-duration: 3s;
+    animation-timing-function:cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+@keyframes pigBoostAni {
+    50% {
+        font-size: 2rem;
+        transform: rotate(-30deg);
+    }
+    100% {
+        font-size: 0;
+        transform: rotate(50deg);
+    }
 }
 
 .bestOfMenu {

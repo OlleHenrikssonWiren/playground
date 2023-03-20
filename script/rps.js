@@ -3,6 +3,9 @@
 //document.onclick = function testEnabled() { // This is for debugging
  //   console.log(keyBtn)
 //}
+
+
+//Variables
 let halt = null; //Pause mechanic on key regs
 let enabled1 = halt; // Toggle key regs for player 1
 let enabled2 = halt; // Toggle Key regs for player 2 
@@ -27,6 +30,9 @@ gotPoints2 = false;
 currentChar1 = "";
 currentChar2 = "";
 
+
+//Refresh Button
+document.querySelector(".resetBtn").addEventListener("click", endGame)
 
 //Start Menu
 let footer = document.querySelector(".footerRPS");
@@ -93,6 +99,7 @@ function endGame() {
     let firstToButton = document.querySelectorAll(".bestNum")
     for (let ftBtnNum = 0; ftBtnNum < firstToButton.length; ftBtnNum++) {  
         firstToButton[ftBtnNum].classList.remove("firstToBtnOn");
+        firstToButton[3].classList.add("firstToBtnOn")
     }
 }
 
@@ -574,6 +581,7 @@ for (let a = 0; a < glowBox1.length; a++) {
 
     //Point Handout System
 setTimeout(() => {
+characterPig();
 if (p1Choice === "rock" && p2Choice === "rock") {
     draw = true;
     glowBox1[0].classList.remove("glow");
@@ -796,6 +804,8 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
         let charDesc = document.querySelector(".charDesc1");
         let charImg = document.querySelector(".charBigIcon1");
         let charTitle = document.querySelector(".charTitle1")
+        let popupText = document.querySelector(".infoPopupText")
+        let popupBox = document.querySelector(".infoPopup")
 
         switch (charBox1) {
             case 0: 
@@ -811,7 +821,12 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>PIG<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "Pig go oink"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span> <br> Trigger <span class=descSpan>Pig Boost</span> after winning a round. <div class=descItalic>Useless for First to 3... That's my fault.</div>"
+
+            
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Pig Boost</span> grants +1 point(s)<br> if you are behind by 3 or more point(s)."
+
             break;
 
             case 2:
@@ -819,10 +834,9 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>TURKEY<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round randomly replace 1 of enemies options with a <span class=descSpan>turkey</span>."
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round have a random chance replace 1 of opponent's options with a <span class=descSpan>turkey</span>.<div class=descItalic>The chance is 15% I think.</div>"
 
-            let popupText = document.querySelector(".infoPopupText")
-            let popupBox = document.querySelector(".infoPopup")
+            
 
             popupBox.style.visibility = "visible"
             popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 point(s) to yourself no matter the combination."
@@ -863,7 +877,9 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
     function charHoverP2() {
         let charDesc = document.querySelector(".charDesc2");
         let charImg = document.querySelector(".charBigIcon2");
-        let charTitle = document.querySelector(".charTitle2")  
+        let charTitle = document.querySelector(".charTitle2");
+        let popupText = document.querySelector(".infoPopupText");
+        let popupBox = document.querySelector(".infoPopup");
 
         switch (charBox2) {
             case 0: 
@@ -879,7 +895,11 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>PIG<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/pigEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "Pig go oink"
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span> <br> Trigger <span class=descSpan>Pig Boost</span> after winning a round. <div class=descItalic>Someone had to get the  comeback mechanic.</div>"
+
+            
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Pig Boost</span> grants +1 point(s)<br> if you are behind by 3 or more point(s)."
             break;
 
             case 2:
@@ -887,10 +907,9 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>TURKEY<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/turkeyEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round randomly replace 1 of enemies options with a <span class=descSpan>turkey</span>."
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> Each round have a random chance to replace 1 of opponent's options with a <span class=descSpan>turkey</span>.<div class=descItalic>Quack.</div>"
 
-            let popupText = document.querySelector(".infoPopupText")
-            let popupBox = document.querySelector(".infoPopup")
+            
 
             popupBox.style.visibility = "visible"
             popupText.innerHTML = "<span class=descSpan>Turkey</span> grants -1 point(s) to yourself no matter the combination."
@@ -927,7 +946,35 @@ if (currentChar2 === "fox") {
         console.log("gigaChad")
     } 
 }
-
+function characterPig() {
+    if(currentChar1 === "pig" || currentChar2 === "pig") { // Check if any player is using pig
+        if (currentChar1  === "pig") { // What to do if player 1 is pig
+            if (points1 + 3 <= points2) {
+                let pigBoost = document.querySelector(".pigBoost1");
+                selectionAudio1.play()
+                pigBoost.classList.add("pigBoostOn")
+                setTimeout(() => {
+                pigBoost.classList.remove("pigBoostOn") //To refresh the animation
+                }, 4000);
+                console.log("pig ability triggered " + points1 + " " + points2)
+                points1 += 1;                
+            }
+        }
+    if (currentChar2 === "pig") { //If player 2 is pig instead
+        if (points2 + 3 <= points1) {
+            let pigBoost = document.querySelector(".pigBoost2");
+            selectionAudio2.play()
+            pigBoost.classList.add("pigBoostOn")
+            setTimeout(() => {
+            pigBoost.classList.remove("pigBoostOn") //To refresh the animation
+            }, 4000);
+            console.log()  
+            console.log("pig ability triggered " + points1 + " " + points2)
+            points2 += 1;   
+        }
+    }
+    }
+}
 
 
 
