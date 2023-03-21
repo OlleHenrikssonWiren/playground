@@ -56,6 +56,7 @@ function setupPhaseEnd() {
     if(currentChar1 === "turkey" || currentChar2 === "turkey") {
         callRandomFunction(list)
     }
+    camelPassive();
     
 
     } else {
@@ -83,6 +84,7 @@ function endGame() {
     currentChar1 = "";
     currentChar2 = "";
     turkeyRemover();
+    enforceRemover();
     firstToMode = "";
     bestOfMenu.style.visibility = "visible"
     footer.classList.remove("closed")
@@ -199,7 +201,7 @@ for (let h = 0; h < charBtn2.length; h++) {
             for (m = 0; m < button2.length; m++) {
                 button2[0].classList.add("btnOn")
             }
-            P2characterFox();
+            
             setupPhaseEnd();
 
         break;
@@ -524,6 +526,11 @@ function startCountdown() {
         selectWinner();
     }, 3000) 
 }
+
+//What to do when x character is picked
+
+
+
  //what do to after both have chosen option
 function selectWinner() {
     let player1Item = document.querySelectorAll(".player1Item");
@@ -539,6 +546,7 @@ function selectWinner() {
         enabled1 = true;
         enabled2 = true;
         turkeyRemover();
+        enforceRemover();
         firstTo();
         console.log("first to triggered")
         if(currentChar1 === "turkey" || currentChar2 === "turkey") { //Reload RNG system after a round
@@ -712,6 +720,27 @@ if (p1Choice === "scissor" && p2Choice === "scissor") {
     glowBox2[2].classList.remove("glow");
     
 }
+if (currentChar1 === "camel" || currentChar2 === "camel") {
+    if (currentChar1 === "camel") {
+        let enforcePaper = document.querySelector(".enforcePassive1")
+        if (enforcePaper.classList.contains("enforceOn")) {
+            if (p1Choice === "paper" && p2Choice === "scissor") {
+                console.log("ENFORCED RIGHT??")
+                points2 -= 1;
+                pointsCounter2.innerHTML = points2
+            }
+        }
+    }
+    if (currentChar2 === "camel") {
+        let enforcePaper = document.querySelector(".enforcePassive2")
+        if (enforcePaper.classList.contains("enforceOn")) {
+            if (p2Choice === "paper" && p1Choice === "scissor") {
+                points1 -= 1;
+                pointsCounter1.innerHTML = points1;
+            }
+        }
+    }
+}
 
 //If turkey section
 if (p1Choice === "turkeyFood") {
@@ -852,7 +881,7 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             case 0: 
             console.log("hovering character fox");
             charTitle.innerHTML = "<h4>FOX<h4>";
-            charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png)"
+            charImg.style.backgroundImage = "url(../imgs/chars/foxEmoji.png"
             charImg.style.marginLeft = "0"
             charDesc.innerHTML = "<span class=descSpan>Passive:</span> The first point(s) won is +2 instead of +1."
             break;
@@ -903,7 +932,15 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>CAMEL<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>bruh</div>"      
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 0, 3, 6, 9 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This is a defensive fella</div>"     
+            
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Enforce:</span> has no losing combination."
+
+
+            for (let num = 0; num < popupText.length; num++) { 
+            popupText[num].addEventListener("mouseenter", Popup); 
+            }
             break;  
         }
         
@@ -929,7 +966,7 @@ let charOptBox2 = document.querySelectorAll(".skinOptBox2");
 for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
 
     charOptBox2[charBox2].addEventListener("mouseenter", charHoverP2);
-    //charOptBox2[charBox2].addEventListener("mouseleave", charLeaveP2);
+    charOptBox2[charBox2].addEventListener("mouseleave", charLeaveP2);
 
     function charHoverP2() {
         let charDesc = document.querySelector(".charDesc2");
@@ -990,10 +1027,30 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>CAMEL<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> he go boom <span class=descSpan>turkey</span>.<div class=descItalic>drought</div>"    
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 0, 3, 6, 9 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This one is going to A tier</div>"     
+            
+            popupBox.style.visibility = "visible"
+            popupText.innerHTML = "<span class=descSpan>Enforce:</span> has no losing combination."
+
+
+            for (let num = 0; num < popupText.length; num++) { 
+            popupText[num].addEventListener("mouseenter", Popup); 
+            } 
             break;
         }
         
+    }
+    function charLeaveP2() {
+        let charImg = document.querySelector(".charBigIcon1");
+        let popupText = document.querySelector(".infoPopupText")
+        let popupBox = document.querySelector(".infoPopup")
+        let charDesc = document.querySelector(".charDesc1");
+        let charTitle = document.querySelector(".charTitle1");
+
+        
+        popupBox.style.visibility = "hidden"
+        
+
     }
 }
 
@@ -1046,8 +1103,83 @@ function characterPig() {
     }
     }
 }
+            //Camel Passive
+function camelPassive() {
+    if (currentChar1 === "camel" || currentChar2 === "camel") {
+        console.log("passive for cam")
+        if (currentChar1 === "camel") {
+            if (points1 === 0 || points1 === 3 ||points1 === 6 ||points1 === 9 ||points1 === 12) {
+                enforcePassive();
+            }
+        }
+        if (currentChar2 === "camel") {
+            if (points2 === 0 || points2 === 3 ||points2 === 6 ||points2 === 9 ||points2 === 12) {
+                enforcePassive();
+            }
+        }
+    }
+}
+function enforcePassive() {
+    if (currentChar1 === "camel") {
+        let sandFall = document.querySelector(".fallPassive1")
+        let enforcePaper = document.querySelector(".enforcePassive1")
+        let playerModel = document.querySelector(".character1")
 
+        enforcePaper.classList.add("enforceOn") //This is to allow Points shizz to work, check with classlist.contains to make passive work
 
+        setTimeout(() => {
+        sandFall.classList.add("sandFallOn")
+        }, 500);
+        
+        setTimeout(() => {
+        sandFall.classList.remove("sandFallOn")
+        }, 2500);
+        setTimeout(() => {
+        enforcePaper.style.opacity = "1";
+        }, 2000);
+        setTimeout(() => {
+        playerModel.style.bottom = "-100px"
+        playerModel.style.left = "40px"
+        }, 300);
+        setTimeout(() => {
+        playerModel.style.bottom = ""
+        playerModel.style.left = ""
+        }, 1000);
+    }
+    if (currentChar2 === "camel") {
+        let sandFall = document.querySelector(".fallPassive2")
+        let enforcePaper = document.querySelector(".enforcePassive2")
+        let playerModel = document.querySelector(".character2") 
+
+        enforcePaper.classList.add("enforceOn")
+
+        setTimeout(() => {
+        sandFall.classList.add("sandFallOn")
+        }, 500);
+            
+        setTimeout(() => {
+        sandFall.classList.remove("sandFallOn")
+        }, 2500);
+        setTimeout(() => {
+        enforcePaper.style.opacity = "1";
+        }, 2000);
+        setTimeout(() => {
+        playerModel.style.bottom = "-100px"
+        playerModel.style.right = "40px"
+        }, 300);
+        setTimeout(() => {
+        playerModel.style.bottom = ""
+        playerModel.style.left = ""
+        }, 1000);
+    }
+}
+function enforceRemover() {
+    let enforcePaper = document.querySelectorAll(".enforcePaper")
+    for (let gag = 0; gag < enforcePaper.length; gag++) {
+        enforcePaper[gag].style.opacity = "0"
+        enforcePaper[gag].classList.remove("enforceOn")
+    }
+}
 
 // Information hovers 
 let popupText = document.querySelectorAll(".popupText")

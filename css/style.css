@@ -626,8 +626,69 @@ button {
     margin-left: 50vw;
     z-index: 2;
     transition: ease 0.4s;
-    background-size: cover;
+    background-size: 270px;
 }
+.sandFallPassive {
+    width: 150px;
+    height: 100vh;
+    position: fixed;
+    z-index: 22;
+    background:linear-gradient(110.3deg, #A40606 8.7%, #D98324 89.1%);
+    opacity: 80%;
+    top: -100vh;
+    filter: blur(3px);
+    border-radius: 20px;
+    
+    
+}
+.sandFallOn {
+    animation-name: sandFallAni;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+}
+.enforcePassive1, .enforcePassive2 {
+    position:fixed;
+    z-index: 22;
+    opacity: 90%;
+    filter: drop-shadow(0px 0px 20px rgb(241, 122, 11)) invert(30%);
+    text-shadow: 1px -1px 36px rgba(150, 104, 6, 0.83);
+    opacity: 0;
+    transition: 0.3s ease;
+}
+@keyframes sandFallAni {
+    0% {
+        transform: skew(-5deg);
+        background:linear-gradient(110.3deg, #A40606 8.7%, #D98324 89.1%);
+
+    }
+    20% {
+        transform: skew(-10deg);
+    }
+    40% {
+        transform: skew(0deg);
+    }
+    60% {
+        transform: skew(10deg);
+        background:linear-gradient(10.3deg, #A40606 8.7%, #D98324 89.1%);
+    }
+    80% {
+        transform: skew(0deg);
+
+    }
+    100% {
+        top: 100vh;
+        transform: skew(-10deg);
+        background:linear-gradient(110.3deg, #A40606 8.7%, #D98324 89.1%);
+    }
+}
+.fallPassive1 {
+    left: 20%;
+}
+.fallPassive2 {
+    right: 20%;
+}
+
 .imgBorder {
     width: 21vw;
     height: 21vh;
