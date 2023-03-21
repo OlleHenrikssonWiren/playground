@@ -578,8 +578,12 @@ function selectWinner() {
                 callRandomFunction(list)
             }
         } 
-        
+    camelPassive();
     }, 4000);
+    setTimeout(() => {
+        gotPoints1 = false;
+        gotPoints2 = false;
+    }, 8000);
 
     console.log("selecting winner " + p1Choice)
 for (let a = 0; a < glowBox1.length; a++) {
@@ -847,8 +851,6 @@ function playWinSeq() {
     char1.style.bottom = "";
     char2.style.right = "";
     char2.style.bottom = "";
-    gotPoints1 = false;
-    gotPoints2 = false;
     draw = false;
     }, 2000);
 }
@@ -1108,12 +1110,12 @@ function camelPassive() {
     if (currentChar1 === "camel" || currentChar2 === "camel") {
         console.log("passive for cam")
         if (currentChar1 === "camel") {
-            if (points1 === 0 || points1 === 3 ||points1 === 6 ||points1 === 9 ||points1 === 12) {
+            if (points1 === 1 && gotPoints1 === true ||points1 === 6 && gotPoints1 === true ||points1 === 9 && gotPoints1 === true ||points1 === 12 && gotPoints1 === true) {
                 enforcePassive();
             }
         }
         if (currentChar2 === "camel") {
-            if (points2 === 0 || points2 === 3 ||points2 === 6 ||points2 === 9 ||points2 === 12) {
+            if (points2 === 0 || points2 === 3 ||points2 === 6 ||points2 === 9 ||points2 === 12 && gotPoints2 === true) {
                 enforcePassive();
             }
         }
