@@ -934,7 +934,7 @@ for (let charBox1 = 0; charBox1 < charOptBox1.length; charBox1++) {
             charTitle.innerHTML = "<h4>CAMEL<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 0, 3, 6, 9 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This is a defensive fella</div>"     
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 2, 4, 8 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This is a defensive fella</div>"     
             
             popupBox.style.visibility = "visible"
             popupText.innerHTML = "<span class=descSpan>Enforce:</span> has no losing combination."
@@ -1029,7 +1029,7 @@ for (let charBox2 = 0; charBox2 < charOptBox2.length; charBox2++) {
             charTitle.innerHTML = "<h4>CAMEL<h4>";
             charImg.style.backgroundImage = "url(../imgs/chars/camelEmoji.png)"
             charImg.style.marginLeft = "0"
-            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 0, 3, 6, 9 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This one is going to A tier</div>"     
+            charDesc.innerHTML = "<span class=descSpan>Passive:</span><br> after winning 2, 4, 8 and 12 point(s) <span class=descSpan>enforce</span> paper for that round.<div class=descItalic>This one is going to A tier</div>"     
             
             popupBox.style.visibility = "visible"
             popupText.innerHTML = "<span class=descSpan>Enforce:</span> has no losing combination."
@@ -1110,12 +1110,12 @@ function camelPassive() {
     if (currentChar1 === "camel" || currentChar2 === "camel") {
         console.log("passive for cam")
         if (currentChar1 === "camel") {
-            if (points1 === 1 && gotPoints1 === true ||points1 === 6 && gotPoints1 === true ||points1 === 9 && gotPoints1 === true ||points1 === 12 && gotPoints1 === true) {
+            if (points1 === 2 && gotPoints1 === true ||points1 === 4 && gotPoints1 === true ||points1 === 8 && gotPoints1 === true ||points1 === 12 && gotPoints1 === true) {
                 enforcePassive();
             }
         }
         if (currentChar2 === "camel") {
-            if (points2 === 0 || points2 === 3 ||points2 === 6 ||points2 === 9 ||points2 === 12 && gotPoints2 === true) {
+            if (points2 === 2 && gotPoints2 === true || points2 === 4 && gotPoints2 === true ||points2 === 8 && gotPoints2 === true || points2 === 12 && gotPoints2 === true) {
                 enforcePassive();
             }
         }
@@ -1315,7 +1315,7 @@ function turkeyRemover() {
   
   
   var list = [
-    {chance: 0.1, func: turkeySuccess}, // 15% chance to spawn.
+    {chance: 0.15, func: turkeySuccess}, // 15% chance to spawn.
     {chance: 1, func: turkeyFail},
   ];
   
