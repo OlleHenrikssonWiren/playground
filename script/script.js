@@ -429,3 +429,8 @@ function gameOver() {
 function reload(){
     window.location.reload();
 }
+
+
+
+
+
